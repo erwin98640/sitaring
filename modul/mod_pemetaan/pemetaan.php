@@ -50,12 +50,13 @@
 			<script language="javascript">document.location.href="?module=pemetaan"</script>
 		<?php
 	}
-switch ($_GET[act]) {
+switch (isset($_GET['act'])){
 default:
 ?>
 
 <script type="text/javascript" src="js/jquery-1.12.3.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFpkPVjM26Py4C4pDe9RiCVWPl4s_pXrw&callback=initMap"></script>
 <script type="text/javascript">
 	var peta;
 	var jenis = "kelapa";
@@ -172,7 +173,7 @@ default:
 							$triwulan=mysqli_query($koneksi, "SELECT * FROM ttriwulan ORDER BY id_triwulan ASC");
 							while ($diti=mysqli_fetch_array($triwulan)) {
 						?>
-						<option value="<?php echo $diti[nama_triwulan]?>"><?php echo $diti[nama_triwulan]?></option>
+						<option value="<?php echo $diti['nama_triwulan']?>"><?php echo $diti['nama_triwulan']?></option>
 						<?php
 							}
 						?>
@@ -185,7 +186,7 @@ default:
 							$triwulan=mysqli_query($koneksi, "SELECT * FROM ttriwulan GROUP BY tahun ORDER BY id_triwulan ASC");
 							while ($diti=mysqli_fetch_array($triwulan)) {
 						?>
-						<option value="<?php echo $diti[tahun]?>"><?php echo $diti[tahun]?></option>
+						<option value="<?php echo $diti['tahun']?>"><?php echo $diti['tahun']?></option>
 						<?php
 							}
 						?>
@@ -198,7 +199,7 @@ default:
 							$komoditi=mysqli_query($koneksi, "SELECT * FROM tkomoditi ORDER BY id_komoditi ASC");
 							while ($paten=mysqli_fetch_array($komoditi)) {
 						?>
-						<option value="<?php echo $paten[nama_komoditi]?>"><?php echo $paten[nama_komoditi]?></option>
+						<option value="<?php echo $paten['nama_komoditi']?>"><?php echo $paten['nama_komoditi']?></option>
 						<?php
 							}
 						?>
@@ -211,7 +212,7 @@ default:
 							$sakit=mysqli_query($koneksi, "SELECT * FROM tpenyakit ORDER BY id_penyakit ASC");
 							while ($paten=mysqli_fetch_array($sakit)) {
 						?>
-						<option value="<?php echo $paten[nama_penyakit]?>"><?php echo $paten[nama_penyakit]?></option>
+						<option value="<?php echo $paten['nama_penyakit']?>"><?php echo $paten['nama_penyakit']?></option>
 						<?php
 							}
 						?>
@@ -224,7 +225,7 @@ default:
 							$kabu=mysqli_query($koneksi, "SELECT * FROM tkabupaten ORDER BY id_kabupaten ASC");
 							while ($paten=mysqli_fetch_array($kabu)) {
 						?>
-						<option value="<?php echo $paten[nama_kabupaten]?>"><?php echo $paten[nama_kabupaten]?></option>
+						<option value="<?php echo $paten['nama_kabupaten']?>"><?php echo $paten['nama_kabupaten']?></option>
 						<?php
 							}
 						?>
@@ -239,7 +240,7 @@ default:
 							$kabu=mysqli_query($koneksi, "SELECT * FROM tluaskomoditi ORDER BY id_luas_komoditi ASC");
 							while ($paten=mysqli_fetch_array($kabu)) {
 						?>
-						<option value="<?php echo $paten[luas_komoditi]?>"><?php echo $paten[luas_komoditi]?></option>
+						<option value="<?php echo $paten['luas_komoditi']?>"><?php echo $paten['luas_komoditi']?></option>
 						<?php
 							}
 						?>

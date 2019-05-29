@@ -9,6 +9,21 @@ elseif ($_GET['module'] =='home'){
   include "modul/mod_home/home.php";
 }
 
+// Bagian Bidang
+elseif ($_GET['module']=='bidang'){
+  include "modul/mod_bidang/bidang.php";
+}
+
+// Bagian Pemetaan
+elseif ($_GET['module']=='pemetaan'){
+  include "modul/mod_pemetaan/pemetaan.php";
+}
+
+
+
+
+
+
 // Bagian Penyakit
 elseif ($_GET['module']=='penyakit'){
   include "modul/mod_penyakit/Penyakit.php";
@@ -34,11 +49,6 @@ elseif ($_GET['module']=='luaskomoditi'){
   include "modul/mod_luaskomoditi/luaskomoditi.php";
 }
 
-// Bagian Pemetaan
-elseif ($_GET['module']=='pemetaan'){
-  include "modul/mod_pemetaan/pemetaan.php";
-}
-
 // Bagian Pengendalian
 elseif ($_GET['module']=='pengendalian'){
   include "modul/mod_pengendalian/pengendalian.php";
@@ -57,11 +67,6 @@ elseif ($_GET['module']=='laporan_pengendalian'){
 // Bagian Grafik
 elseif ($_GET['module']=='grafik'){
   include "modul/mod_grafik/grafik.php";
-}
-
-// Bagian Pesan
-elseif ($_GET['module']=='pesan'){
-  include "modul/mod_pesan/pesan.php";
 }
 
 // Bagian Pengaturan

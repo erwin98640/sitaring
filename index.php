@@ -5,14 +5,12 @@
 	// 	header('location:login.php');
 	// } else {
 ?>
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>SITARING HAJA</title>
+		<title>SITARING HAJA - Sistem Informasi Inventarisasi Data Monitoring Hasil Pekerjaan</title>
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 		<link rel="stylesheet" href="css/bootstrap.css">
-		<!-- <link rel="stylesheet" href="css/bootstrap-v4.css"> -->
 		<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script>
@@ -41,9 +39,11 @@
 						<div class="collapse navbar-collapse" id="target-list">
 							<div class="nav navbar-nav">
 								<li><a href="?module=home">Beranda</a></li>
+								<li><a href=?module=pengaturan>Data Pekerjaan</a></li>
+								<li><a href=?module=bidang>Bidang</a></li>
+								<li><a href=?module=pemetaan>Pemetaan</a></li>
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href=?module=kabupaten>Kabupaten</a></li>
 										<li><a href=?module=komoditi>Komoditi</a></li>
 										<li><a href=?module=penyakit>Penyakit</a></li>
 										<li><a href=?module=triwulan>Triwulan</a></li>
@@ -52,7 +52,6 @@
 								</li>
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Transaksi<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href=?module=pemetaan>Pemetaan</a></li>
 										<li><a href=?module=pengendalian>Pengendalian</a></li>
 									</ul>
 								</li>
@@ -63,8 +62,6 @@
 										<li><a href=?module=grafik>Grafik Pemetaan</a></li>
 									</ul>
 								</li>
-								<li><a href=?module=pesan>Pesan</a></li>
-								<li><a href=?module=pengaturan>Pengaturan</a></li>
 								<li><a href="logout.php">Keluar</a></li>
 							</div>
 						</div>
@@ -80,6 +77,3 @@
 		</div>
 	</body>
 </html>
-<?php
-// }
-?>
