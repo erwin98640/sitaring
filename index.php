@@ -42,7 +42,7 @@
 								<li><a href=?module=pengaturan>Data Pekerjaan</a></li>
 								<li><a href=?module=bidang>Bidang</a></li>
 								<li><a href=?module=pemetaan>Pemetaan</a></li>
-								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
+								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href=?module=komoditi>Komoditi</a></li>
 										<li><a href=?module=penyakit>Penyakit</a></li>
@@ -61,7 +61,7 @@
 										<li><a href=?module=laporan_pengendalian>Pengendalian Triwulan</a></li>
 										<li><a href=?module=grafik>Grafik Pemetaan</a></li>
 									</ul>
-								</li>
+								</li> -->
 								<li><a href="logout.php">Keluar</a></li>
 							</div>
 						</div>
