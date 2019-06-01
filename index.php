@@ -40,7 +40,12 @@
 							<div class="nav navbar-nav">
 								<li><a href="?module=home">Beranda</a></li>
 								<li><a href=?module=pengaturan>Data Pekerjaan</a></li>
-								<li><a href=?module=bidang>Bidang</a></li>
+								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href=?module=bidang>Bidang</a></li>
+										<li><a href=?module=satuan>Satuan</a></li>
+									</ul>
+								</li>
 								<li><a href=?module=pemetaan>Pemetaan</a></li>
 								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
@@ -49,13 +54,8 @@
 										<li><a href=?module=triwulan>Triwulan</a></li>
 										<li><a href=?module=luaskomoditi>Luas Komoditi</a></li>
 									</ul>
-								</li>
-								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Transaksi<span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href=?module=pengendalian>Pengendalian</a></li>
-									</ul>
-								</li>
-								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Laporan<span class="caret"></span></a>
+								</li> -->
+								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Laporan<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href=?module=laporan_triwulan>Pemetaan Triwulan</a></li>
 										<li><a href=?module=laporan_pengendalian>Pengendalian Triwulan</a></li>

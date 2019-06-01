@@ -19,6 +19,11 @@ elseif ($_GET['module']=='pemetaan'){
   include "modul/mod_pemetaan/pemetaan.php";
 }
 
+// Bagian Satuan
+elseif ($_GET['module']=='satuan'){
+  include "modul/mod_satuan/satuan.php";
+}
+
 
 
 
@@ -47,11 +52,6 @@ elseif ($_GET['module']=='triwulan'){
 // Bagian Luas Komoditi
 elseif ($_GET['module']=='luaskomoditi'){
   include "modul/mod_luaskomoditi/luaskomoditi.php";
-}
-
-// Bagian Pengendalian
-elseif ($_GET['module']=='pengendalian'){
-  include "modul/mod_pengendalian/pengendalian.php";
 }
 
 // Bagian Laporan Triwulan
