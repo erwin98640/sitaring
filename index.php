@@ -10,7 +10,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>SITARING HAJA - Sistem Informasi Inventarisasi Data Monitoring Hasil Pekerjaan</title>
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" href="css/bootstrap.css">
 		<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script>
@@ -18,8 +17,8 @@
 				$('[data-toggle="tooltip"]').tooltip()
 				})
 		</script>
-
 		<script src="js/highcharts.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/bootstrap.css">
 	</head>
 	<body onload="carikordinat()">
 		<div class="container">

@@ -303,29 +303,72 @@ default:
 			<div class="col-lg-12">
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
-						<thead>
-							<tr class="success text-uppercase">
-								<th>No</th>
-								<th>Id</th>
-								<th>Triwulan</th>
-								<th>Komoditi</th>
-								<th>Penyakit</th>
-								<th>Kabupaten</th>
-								<th>luas</th>
-								<th>serangan_ringan</th>
-								<th>serangan_berat</th>
-								<th>jumlah</th>
-								<th width="40px">Aksi</th>
+						<thead class="text-nowrap text-uppercase">
+							<tr class="success">
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">No</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Kode / Program dan Kegiatan</th>
+								<th class="text-center" style="vertical-align: middle;" colspan="2">Urian</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pagu Anggaran</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Nomor dan Nilai Kontrak</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pelaksana</th>
+								<th class="text-center" style="vertical-align: middle;" colspan="5">Dimensi</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Jenis Pengadaan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Waktu Pelaksanaan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Status Kepemilikan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Harga Perolehan <br>Rp.</th>
+								<th class="text-center" style="vertical-align: middle;" colspan="3">Realisasi</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Lokasi</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Koordinat</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3">Penanggung Jawab</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="4" width="40px">Aksi</th>
+							</tr>
+							<tr class="success">
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Nama Pekerjaan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Thn Perolehan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Pjg</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Lbr</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">T</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Vol</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="2">Sat.</th>
+								<th class="text-center" style="vertical-align: middle;" colspan="2">Keuangan</th>
+								<th>Fisik</th>
+							</tr>
+							<tr class="success">
+								<th class="text-center">Rp.</th>
+								<th class="text-center">(%)</th>
+								<th class="text-center">(%)</th>
+							</tr>
+							<tr class="danger">
+								<th class="text-center">1</th>
+								<th class="text-center">2</th>
+								<th class="text-center">3</th>
+								<th class="text-center">4</th>
+								<th class="text-center">5</th>
+								<th class="text-center">6</th>
+								<th class="text-center">7</th>
+								<th class="text-center">8</th>
+								<th class="text-center">9</th>
+								<th class="text-center">10</th>
+								<th class="text-center">11</th>
+								<th class="text-center">12</th>
+								<th class="text-center">13</th>
+								<th class="text-center">14</th>
+								<th class="text-center">15</th>
+								<th class="text-center">16</th>
+								<th class="text-center">17</th>
+								<th class="text-center">18</th>
+								<th class="text-center">19</th>
+								<th class="text-center">20</th>
+								<th class="text-center">21</th>
+								<th class="text-center">22</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php
-								$query=mysqli_query($koneksi, "SELECT * FROM tpemetaan ORDER BY id_pemetaan");
+							<?php $query=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan ORDER BY id_pekerjaan");
 								$no=1;
-								while ($data=mysqli_fetch_assoc($query)) {
-							?>
+								while ($data=mysqli_fetch_assoc($query)) { ?>
 							<tr>
-								<td><?php echo $no ?></td>
+								<td><?php echo $no++ ?></td>
 								<td><?php echo $data["id_pemetaan"] ?></td>
 								<td><?php echo $data["nama_triwulan"] ?></td>
 								<td><?php echo $data["nama_komoditi"] ?></td>
@@ -340,10 +383,7 @@ default:
 									<a href="?module=pemetaan&mode=delete&id_pemetaan=<?php echo $data[id_pemetaan] ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
 								</td>
 							</tr>
-							<?php
-								$no++;
-								}
-							?>
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>

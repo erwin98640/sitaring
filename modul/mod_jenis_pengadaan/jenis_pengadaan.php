@@ -10,18 +10,17 @@
 	}
 
 	if (isset($_POST['update'])) {
-		if ($_POST[nama_komoditi]=="") {
-		?>
+		$jenis_pengadaan=$_POST['jenis_pengadaan'];
+		if ($jenis_pengadaan == "") { ?>
 			<script>alert("Data tidak boleh kosong")</script>
-		<?php
-		}else{
-			$query = mysqli_query($koneksi, "UPDATE tkomoditi SET nama_komoditi='$_POST[nama_komoditi]' WHERE id_komoditi='$_POST[id]'");
+		<?php } else {
+			$query = mysqli_query($koneksi, "UPDATE data_jenis_pengadaan SET jenis_pengadaan='$jenis_pengadaan' WHERE id_jenis_pengadaan='$_POST[id]'");
 		}
 	}
 
 	if (isset($_GET['mode'])=='delete') {
-		$id_komoditi=$_GET['id_komoditi'];
-		mysqli_query($koneksi, "DELETE FROM tkomoditi WHERE id_komoditi='$id_komoditi'");
+		$id_jenis_pengadaan=$_GET['id_jenis_pengadaan'];
+		mysqli_query($koneksi, "DELETE FROM data_jenis_pengadaan WHERE id_jenis_pengadaan='$id_jenis_pengadaan'");
 	}
 
 switch (isset($_GET["act"])) {	
@@ -81,27 +80,26 @@ default: ?>
 <?php
 break;
 case 'update':
-$edit=mysqli_query($koneksi, "SELECT * FROM tkomoditi WHERE id_komoditi='$_GET[id_komoditi]'");
-$data=mysqli_fetch_array($edit);
-?>
+$edit=mysqli_query($koneksi, "SELECT * FROM data_jenis_pengadaan WHERE id_jenis_pengadaan='$_GET[id_jenis_pengadaan]'");
+$data=mysqli_fetch_object($edit) ?>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="judul">
-					<span>DATA KOMODITI</span>
+					<span>JENIS PENGADAAN</span>
 				</div>
 			</div>
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-lg-6 col-xs-12 col-md-6 col-sm-6">
-				<form class="" action="?module=komoditi" method="post">
-					<input type="hidden" name="id" value="<?php echo $data[id_komoditi] ?>" placeholder="">
+			<div class="col-lg-10 col-xs-12 col-md-6 col-sm-6">
+				<form class="form-inline" action="?module=jenis_pengadaan" method="POST">
+					<input type="hidden" name="id" value="<?php echo $data->id_jenis_pengadaan ?>" placeholder="">
 					<div class="form-group">
-						<label for="nama_komoditi">NAMA KOMODITI</label>
-						<input type="text" name="nama_komoditi" id="nama_komoditi" value="<?php echo $data[nama_komoditi] ?>" placeholder="nama komoditi" class="form-control">
+						<label>NAMA PENGADAAN</label>
+						<input type="text" name="jenis_pengadaan" value="<?php echo $data->jenis_pengadaan ?>" class="form-control">
 					</div>
-					<button type="button" onclick="self.history.back()" class="btn btn-success">Cancel</button>
+					<button type="button" onclick="self.history.back()" class="btn btn-warning">Cancel</button>
 					<button type="submit" name="update" class="btn btn-success">Update</button>
 				</form>
 			</div>
@@ -115,32 +113,22 @@ $data=mysqli_fetch_array($edit);
 						<thead>
 							<tr class="success text-uppercase">
 								<th>No</th>
-								<th>Id Komoditi</th>
-								<th>Nama Komoditi</th>
+								<th>Nama Pengadaan</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
-								$query=mysqli_query($koneksi, "SELECT * FROM tkomoditi ORDER BY id_komoditi ASC");
+							<?php $query=mysqli_query($koneksi, "SELECT * FROM data_jenis_pengadaan ORDER BY jenis_pengadaan ASC");
 								$no=1;
-								while ($data=mysqli_fetch_array($query)) {
-							?>
+								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>
-								<td><?php echo $no ?></td>
-								<td><?php echo $data[id_komoditi] ?></td>
-								<td><?php echo $data[nama_komoditi] ?></td>
+								<td><?php echo $no++ ?></td>
+								<td><?php echo $data->jenis_pengadaan ?></td>
 							</tr>
-							<?php
-								$no++;
-								}
-							?>
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-<?php
-break;
-}
-?>
+<?php break; } ?>
