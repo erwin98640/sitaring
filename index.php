@@ -43,13 +43,13 @@
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href=?module=bidang>Bidang</a></li>
+										<li><a href=?module=jenis_pengadaan>Jenis Pengadaan</a></li>
 										<li><a href=?module=satuan>Satuan</a></li>
 									</ul>
 								</li>
 								<li><a href=?module=pemetaan>Pemetaan</a></li>
 								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href=?module=komoditi>Komoditi</a></li>
 										<li><a href=?module=penyakit>Penyakit</a></li>
 										<li><a href=?module=triwulan>Triwulan</a></li>
 										<li><a href=?module=luaskomoditi>Luas Komoditi</a></li>

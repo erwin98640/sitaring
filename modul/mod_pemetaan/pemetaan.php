@@ -156,117 +156,123 @@ default:
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="form-group">
-					<label for="">ICON TUMBUHAN</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label>ICON PEKERJAAN</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/kelapa.png">
-					<input type="radio" checked name="jenis" value="kelapa" onclick="setjenis(this.value)"> Kelapa&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="images/kelapa_sawit.png">
+					<input type="radio" checked name="jenis" value="kelapa" onclick="setjenis(this.value)"> Bangunan
+					<!-- <img src="images/kelapa_sawit.png">
 					<input type="radio" name="jenis" value="kelapa_sawit" onclick="setjenis(this.value)"> Kelapa Sawit&nbsp;&nbsp;&nbsp;&nbsp;
 					<img src="images/karet.png">
-					<input type="radio" name="jenis" value="karet" onclick="setjenis(this.value)"> Karet&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="jenis" value="karet" onclick="setjenis(this.value)"> Karet&nbsp;&nbsp;&nbsp;&nbsp; -->
 				</div>
 			</div>
-			<div class="col-lg-6 col-xs-12 col-md-6 col-sm-6">
+			<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
 				<div class="form-group">
-					<label for="">TRIWULAN</label>
-					<select class="form-control" name="nama_triwulan">
-						<?php
-							$triwulan=mysqli_query($koneksi, "SELECT * FROM ttriwulan ORDER BY id_triwulan ASC");
-							while ($diti=mysqli_fetch_array($triwulan)) {
-						?>
-						<option value="<?php echo $diti['nama_triwulan']?>"><?php echo $diti['nama_triwulan']?></option>
-						<?php
-							}
-						?>
+					<label>KODE</label>
+					<input type="text" name="" class="form-control" placeholder="Input Kode">
+				</div>
+				<div class="form-group">
+					<label>PROGRAM KEGIATAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Program Kegiatan">
+				</div>
+				<div class="form-group">
+					<label>NAMA PEKERJAAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Nama Pekerjaan">
+				</div>
+				<div class="form-group">
+					<label>TAHUN PEROLEHAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Tahun Perolehan">
+				</div>
+				<div class="form-group">
+					<label>PAGU ANGGARAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Pagu Anggaran">
+				</div>
+			</div>
+			<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
+				<div class="form-group">
+					<label>NOMOR</label>
+					<input type="text" name="" class="form-control" placeholder="Input Nomor">
+				</div>
+				<div class="form-group">
+					<label>NILAI KONTRAK</label>
+					<input type="text" name="" class="form-control" placeholder="Input Nilai Kontrak">
+				</div>
+				<div class="form-group">
+					<label>PELAKSANA</label>
+					<input type="text" name="" class="form-control" placeholder="Input Pelaksana">
+				</div>
+				<div class="form-group">
+					<label>JENIS PENGADAAN</label>
+					<select name="id_jenis_pengadaan" class="form-control">
+						<?php $jenis=mysqli_query($koneksi, "SELECT * FROM data_jenis_pengadaan ORDER BY jenis_pengadaan ASC");
+						while ($DJenis=mysqli_fetch_object($jenis)) { ?>
+						<option value="<?php echo $DJenis->id_bidang ?>"><?php echo $DJenis->jenis_pengadaan ?></option>
+						<?php } ?>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="">TAHUN</label>
-					<select class="form-control" name="tahun">
-						<?php
-							$triwulan=mysqli_query($koneksi, "SELECT * FROM ttriwulan GROUP BY tahun ORDER BY id_triwulan ASC");
-							while ($diti=mysqli_fetch_array($triwulan)) {
-						?>
-						<option value="<?php echo $diti['tahun']?>"><?php echo $diti['tahun']?></option>
-						<?php
-							}
-						?>
-					</select>
+					<label>WAKTU PELAKSANAAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Waktu Pelaksanaan">
+				</div>
+			</div>
+			<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
+				<div class="form-group">
+					<label>STATUS KEPEMILIKAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Status Kepemilikan">
 				</div>
 				<div class="form-group">
-					<label for="">NAMA KOMODITI</label>
-					<select class="form-control" name="nama_komoditi">
-						<?php
-							$komoditi=mysqli_query($koneksi, "SELECT * FROM tkomoditi ORDER BY id_komoditi ASC");
-							while ($paten=mysqli_fetch_array($komoditi)) {
-						?>
-						<option value="<?php echo $paten['nama_komoditi']?>"><?php echo $paten['nama_komoditi']?></option>
-						<?php
-							}
-						?>
-					</select>
+					<label>HARGA PEROLEHAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Harga Perolehan">
 				</div>
 				<div class="form-group">
-					<label for="">NAMA PENYAKIT</label>
-					<select class="form-control" name="nama_penyakit">
-						<?php
-							$sakit=mysqli_query($koneksi, "SELECT * FROM tpenyakit ORDER BY id_penyakit ASC");
-							while ($paten=mysqli_fetch_array($sakit)) {
-						?>
-						<option value="<?php echo $paten['nama_penyakit']?>"><?php echo $paten['nama_penyakit']?></option>
-						<?php
-							}
-						?>
-					</select>
+					<label>REALISASI KEUANGAN</label>
+					<input type="text" name="" class="form-control" placeholder="Input Realisasi Keuangan">
 				</div>
 				<div class="form-group">
-					<label for="">NAMA KABUPATEN</label>
-					<select class="form-control" name="nama_kabupaten">
-						<?php
-							$kabu=mysqli_query($koneksi, "SELECT * FROM tkabupaten ORDER BY id_kabupaten ASC");
-							while ($paten=mysqli_fetch_array($kabu)) {
-						?>
-						<option value="<?php echo $paten['nama_kabupaten']?>"><?php echo $paten['nama_kabupaten']?></option>
-						<?php
-							}
-						?>
+					<label>LOKASI</label>
+					<input type="text" name="" class="form-control" placeholder="Input Lokasi">
+				</div>
+				<div class="form-group">
+					<label>PENANGGUNG JAWAB</label>
+					<select name="id_bidang" class="form-control">
+						<?php $bidang=mysqli_query($koneksi, "SELECT * FROM data_bidang ORDER BY nama_pendek_bidang ASC");
+						while ($DBidang=mysqli_fetch_object($bidang)) { ?>
+						<option value="<?php echo $DBidang->id_bidang ?>"><?php echo $DBidang->nama_pendek_bidang ?></option>
+						<?php } ?>
 					</select>
 				</div>
 			</div>
+		</div>
+		<div class="row">
 			<div class="col-lg-6 col-xs-12 col-md-6 col-sm-6">
-				<div class="form-group">
-					<label for="">LUAS KOMODITAS</label>
-					<select class="form-control" name="luas_komoditas">
-						<?php
-							$kabu=mysqli_query($koneksi, "SELECT * FROM tluaskomoditi ORDER BY id_luas_komoditi ASC");
-							while ($paten=mysqli_fetch_array($kabu)) {
-						?>
-						<option value="<?php echo $paten['luas_komoditi']?>"><?php echo $paten['luas_komoditi']?></option>
-						<?php
-							}
-						?>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="">LUAS SERANGAN RINGAN</label>
-					<input type="text" class="form-control" name="luas_serangan_ringan" value="" placeholder="luas serangan ringan">
-				</div>
-				<div class="form-group">
-					<label for="">LUAS SERANGAN BERAT</label>
-					<input type="text" class="form-control" name="luas_serangan_berat" value="" placeholder="luas serangan berat">
-				</div>
-				<div class="form-group">
-					<label for="">JUMLAH</label>
-					<input type="text" class="form-control" name="jumlah" value="" placeholder="jumlah">
-				</div>
-				<div class="col-lg-6">
-					<div class="form-group" style="clear:padding-left;">
-						<label for="">KOORDINAT X</label>
-						<input type="text" class="form-control" readonly="readonly" name="koordinat_x" id="x" value="" placeholder="koordinat x">
+				<div class="form-group row">
+					<label class="col-lg-12">LUAS</label>
+					<div class="col-md-3">
+						<input type="text" name="" class="form-control" placeholder="Panjang">
+					</div>
+					<div class="col-md-3">
+						<input type="text" name="" class="form-control" placeholder="Lebar">
+					</div>
+					<div class="col-md-3">
+						<input type="text" name="" class="form-control" placeholder="Tinggi">
+					</div>
+					<div class="col-md-3">
+						<select name="id_satuan" class="form-control">
+							<?php $satuan=mysqli_query($koneksi, "SELECT * FROM data_satuan ORDER BY satuan ASC");
+							while ($DSatuan=mysqli_fetch_object($satuan)) { ?>
+							<option value=""><?php echo $DSatuan->satuan ?></option>
+							<?php } ?>
+						</select>
 					</div>
 				</div>
-				<div class="col-lg-6">
-					<div class="form-group">
-						<label for="">KOORDINAT Y</label>
+			</div>
+			<div class="col-lg-6 col-xs-12 col-md-6 col-sm-6">
+				<div class="form-group row">
+					<div class="col-lg-6">
+						<label>KOORDINAT X</label>
+						<input type="text" class="form-control" readonly="readonly" name="koordinat_x" id="x" value="" placeholder="koordinat x">
+					</div>
+					<div class="col-lg-6">
+						<label>KOORDINAT Y</label>
 						<input type="text" class="form-control" readonly="readonly" name="koordinat_y" id="y" value="" placeholder="koordinat y">
 					</div>
 				</div>
@@ -274,8 +280,8 @@ default:
 		</div>
 	</div>
 	<div class="container-fluid">
-		<button type="submit" name="submit" class="btn btn-success">Simpan</button>
-	</div><br />
+		<button type="submit" name="submit" class="btn btn-success pull-right">Simpan</button>
+	</div>
 	</form>
 	<div class="container-fluid">
 		<div class="row">
@@ -348,8 +354,7 @@ default:
 break;
 case 'update':
 $query=mysqli_query($koneksi, "SELECT * FROM tpengendalian WHERE id_pengendalian='$_GET[id_pengendalian]'");
-$data=mysqli_fetch_array($query);
-?>
+$data=mysqli_fetch_array($query) ?>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">

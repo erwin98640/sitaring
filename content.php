@@ -24,6 +24,11 @@ elseif ($_GET['module']=='satuan'){
   include "modul/mod_satuan/satuan.php";
 }
 
+// Bagian Jenis Pengadaan
+elseif ($_GET['module']=='jenis_pengadaan'){
+  include "modul/mod_jenis_pengadaan/jenis_pengadaan.php";
+}
+
 
 
 
@@ -32,11 +37,6 @@ elseif ($_GET['module']=='satuan'){
 // Bagian Penyakit
 elseif ($_GET['module']=='penyakit'){
   include "modul/mod_penyakit/Penyakit.php";
-}
-
-// Bagian Komoditi
-elseif ($_GET['module']=='komoditi'){
-  include "modul/mod_komoditi/komoditi.php";
 }
 
 // Bagian Kabupaten
