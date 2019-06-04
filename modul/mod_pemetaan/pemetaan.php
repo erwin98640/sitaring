@@ -87,7 +87,8 @@ default:
 	    tanda = new google.maps.Marker({
 	            position: lokasi,
 	            map: peta,
-	            icon: gambar_tanda
+	            icon: gambar_tanda,
+    			scaleSize: 37
 	    });
 	    $("#x").val(lokasi.lat());
 	    $("#y").val(lokasi.lng());
@@ -97,7 +98,7 @@ default:
 	function set_icon(jenisnya){
 	    switch(jenisnya){
 	        case "kelapa":
-	            gambar_tanda = 'images/kelapa.png';
+	            gambar_tanda = 'images/location.png';
 	            break;
 	        case "kelapa_sawit":
 	            gambar_tanda = 'images/kelapa_sawit.png';
@@ -280,7 +281,8 @@ default:
 		</div>
 	</div>
 	<div class="container-fluid">
-		<button type="submit" name="submit" class="btn btn-success pull-right">Simpan</button>
+		<button type="submit" name="submit" class="btn btn-success pull-right" style="margin-left: 10px">Simpan</button>
+		<input type="button" value="Cancel" class="btn btn-warning pull-right" onclick="return RefreshWindow();"/>
 	</div>
 	</form>
 	<div class="container-fluid">

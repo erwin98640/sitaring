@@ -9,24 +9,54 @@ elseif ($_GET['module'] =='home'){
   include "modul/mod_home/home.php";
 }
 
+// Bagian Pekerjaan
+elseif ($_GET['module']=='pekerjaan'){
+  include "modul/mod_pekerjaan/pekerjaan.php";
+}
+
 // Bagian Bidang
 elseif ($_GET['module']=='bidang'){
-  include "modul/mod_bidang/bidang.php";
+  if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_bidang/bidang.php";
+  } else {
+    header ("location:./index.php");
+  }
 }
 
 // Bagian Pemetaan
 elseif ($_GET['module']=='pemetaan'){
-  include "modul/mod_pemetaan/pemetaan.php";
+  if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_pemetaan/pemetaan.php";
+  } else {
+    header ("location:./index.php");
+  }
 }
 
 // Bagian Satuan
 elseif ($_GET['module']=='satuan'){
-  include "modul/mod_satuan/satuan.php";
+  if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_satuan/satuan.php";
+  } else {
+    header ("location:./index.php");
+  }
 }
 
 // Bagian Jenis Pengadaan
 elseif ($_GET['module']=='jenis_pengadaan'){
-  include "modul/mod_jenis_pengadaan/jenis_pengadaan.php";
+  if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_jenis_pengadaan/jenis_pengadaan.php";
+  } else {
+    header ("location:./index.php");
+  }
+}
+
+// Bagian Login
+elseif ($_GET['module']=='login'){
+  if (empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_login/login.php";
+  } else {
+    header ("location:./index.php");
+  }
 }
 
 
@@ -37,11 +67,6 @@ elseif ($_GET['module']=='jenis_pengadaan'){
 // Bagian Penyakit
 elseif ($_GET['module']=='penyakit'){
   include "modul/mod_penyakit/Penyakit.php";
-}
-
-// Bagian Kabupaten
-elseif ($_GET['module']=='kabupaten'){
-  include "modul/mod_kabupaten/kabupaten.php";
 }
 
 // Bagian Triwulan
@@ -67,11 +92,6 @@ elseif ($_GET['module']=='laporan_pengendalian'){
 // Bagian Grafik
 elseif ($_GET['module']=='grafik'){
   include "modul/mod_grafik/grafik.php";
-}
-
-// Bagian Pengaturan
-elseif ($_GET['module']=='pengaturan'){
-  include "modul/mod_pengaturan/pengaturan.php";
 }
 
 // Bagian ambil database

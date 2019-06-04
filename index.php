@@ -1,10 +1,4 @@
-<?php //error_reporting(0);
-	include_once "config/koneksi.php";
-	// session_start();
-	// if (empty($_SESSION['username']) AND empty($_SESSION['passuser'])){
-	// 	header('location:login.php');
-	// } else {
-?>
+<?php include_once "config/koneksi.php"; session_start() ?>
 <!DOCTYPE html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,9 +10,20 @@
 			$(function () {
 				$('[data-toggle="tooltip"]').tooltip()
 				})
+			function RefreshWindow() {
+				window.location.reload(true);
+				}
 		</script>
 		<script src="js/highcharts.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/bootstrap.css">
+
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({
+		          google_ad_client: "ca-pub-2586125774271995",
+		          enable_page_level_ads: true
+		     });
+		</script>
 	</head>
 	<body onload="carikordinat()">
 		<div class="container">
@@ -38,7 +43,8 @@
 						<div class="collapse navbar-collapse" id="target-list">
 							<div class="nav navbar-nav">
 								<li><a href="?module=home">Beranda</a></li>
-								<li><a href=?module=pengaturan>Data Pekerjaan</a></li>
+								<li><a href=?module=pekerjaan>Data Pekerjaan</a></li>
+								<?php if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){ ?>
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href=?module=bidang>Bidang</a></li>
@@ -47,21 +53,11 @@
 									</ul>
 								</li>
 								<li><a href=?module=pemetaan>Pemetaan</a></li>
-								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href=?module=penyakit>Penyakit</a></li>
-										<li><a href=?module=triwulan>Triwulan</a></li>
-										<li><a href=?module=luaskomoditi>Luas Komoditi</a></li>
-									</ul>
-								</li> -->
-								<!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Laporan<span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href=?module=laporan_triwulan>Pemetaan Triwulan</a></li>
-										<li><a href=?module=laporan_pengendalian>Pengendalian Triwulan</a></li>
-										<li><a href=?module=grafik>Grafik Pemetaan</a></li>
-									</ul>
-								</li> -->
-								<li><a href="logout.php">Keluar</a></li>
+								<li><a href="logout.php">Logout</a></li>
+								<?php } ?>
+								<?php if (empty($_SESSION['username']) AND empty($_SESSION['password'])){ ?>
+								<li><a href="?module=login">Login</a></li>
+								<?php } ?>
 							</div>
 						</div>
 					</nav>
