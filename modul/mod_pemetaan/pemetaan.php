@@ -158,7 +158,7 @@ default:
 			<div class="col-lg-12">
 				<div class="form-group">
 					<label>ICON PEKERJAAN</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="images/kelapa.png">
+					<img src="./images/location.png">
 					<input type="radio" checked name="jenis" value="kelapa" onclick="setjenis(this.value)"> Bangunan
 					<!-- <img src="images/kelapa_sawit.png">
 					<input type="radio" name="jenis" value="kelapa_sawit" onclick="setjenis(this.value)"> Kelapa Sawit&nbsp;&nbsp;&nbsp;&nbsp;
