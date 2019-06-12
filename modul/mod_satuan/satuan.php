@@ -35,7 +35,7 @@ default: ?>
 						<label class="">SATUAN</label>
 						<input type="text" name="satuan" class="form-control" placeholder="Nama Satuan">
 					</div>
-					<button type="submit" name="submit" class="btn btn-success pull-right">Simpan</button>
+					<button type="submit" name="submit" class="btn btn-success">Simpan</button>
 				</form>
 			</div>
 		</div>
