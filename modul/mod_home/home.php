@@ -13,7 +13,7 @@
                     <div class="thumbnail" style="height: 300px">
                         <!-- <img src="./assets/data/logo.jpeg" alt="..."> -->
                         <div class="bg-info" style="padding: 20px 0 20px 0">
-                            <h2 class="text-center">100 <br> <small>Kegiatan</small></h2>
+                            <h2 class="text-center">0 <br> <small>Kegiatan</small></h2>
                         </div>
                         <div class="caption">
                             <h3><?php echo $data->nama_pendek_bidang ?></h3>

@@ -48,6 +48,7 @@
 								<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Master<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href=?module=bidang>Bidang</a></li>
+										<li><a href=?module=program>Program Pekerjaan</a></li>
 										<li><a href=?module=jenis_pengadaan>Jenis Pengadaan</a></li>
 										<li><a href=?module=satuan>Satuan</a></li>
 									</ul>

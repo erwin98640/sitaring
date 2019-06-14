@@ -41,6 +41,15 @@ elseif ($_GET['module']=='satuan'){
   }
 }
 
+// Bagian Program
+elseif ($_GET['module']=='program'){
+  if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
+    include "modul/mod_program/program.php";
+  } else {
+    header ("location:./index.php");
+  }
+}
+
 // Bagian Jenis Pengadaan
 elseif ($_GET['module']=='jenis_pengadaan'){
   if (!empty($_SESSION['username']) AND empty($_SESSION['password'])){
@@ -57,46 +66,6 @@ elseif ($_GET['module']=='login'){
   } else {
     header ("location:./index.php");
   }
-}
-
-
-
-
-
-
-// Bagian Penyakit
-elseif ($_GET['module']=='penyakit'){
-  include "modul/mod_penyakit/Penyakit.php";
-}
-
-// Bagian Triwulan
-elseif ($_GET['module']=='triwulan'){
-  include "modul/mod_triwulan/triwulan.php";
-}
-
-// Bagian Luas Komoditi
-elseif ($_GET['module']=='luaskomoditi'){
-  include "modul/mod_luaskomoditi/luaskomoditi.php";
-}
-
-// Bagian Laporan Triwulan
-elseif ($_GET['module']=='laporan_triwulan'){
-  include "modul/mod_laporan_triwulan/laporan_triwulan.php";
-}
-
-// Bagian Laporan Pengendalian
-elseif ($_GET['module']=='laporan_pengendalian'){
-  include "modul/mod_pengendalian_triwulan/laporan_pengendalian.php";
-}
-
-// Bagian Grafik
-elseif ($_GET['module']=='grafik'){
-  include "modul/mod_grafik/grafik.php";
-}
-
-// Bagian ambil database
-elseif ($_GET['module']=='ambildata'){
-  include "modul/mod_pemetaan/ambildata.php";
 }
 
 // Apabila modul tidak ditemukan
