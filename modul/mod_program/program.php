@@ -53,7 +53,7 @@ default: ?>
 							</tr>
 						</thead>
 						<tbody>
-							<?php $query=mysqli_query($koneksi, "SELECT * FROM data_program ORDER BY nama_program ASC");
+							<?php $query=mysqli_query($koneksi, "SELECT * FROM data_program ORDER BY id_program ASC");
 								$no=1;
 								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>

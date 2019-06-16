@@ -1,11 +1,11 @@
-<?php include_once "config/koneksi.php"; session_start() ?>
+<?php include_once "config/koneksi.php"; include "./assets/lib/fungsi_upload.php"; session_start() ?>
 <!DOCTYPE html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>SITARING HAJA - Sistem Informasi Inventarisasi Data Monitoring Hasil Pekerjaan</title>
-		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-		<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
-		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<!-- <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> -->
+		<script type="text/javascript" src="./assets/js/jquery-1.12.3.js"></script>
+		<script type="text/javascript" src="./assets/js/bootstrap.js"></script>
 		<script>
 			$(function () {
 				$('[data-toggle="tooltip"]').tooltip()
@@ -15,7 +15,7 @@
 				}
 		</script>
 		<script src="js/highcharts.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="./assets/css/bootstrap.css">
 
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
@@ -29,7 +29,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-xs-12">
-					<img src="images/header.jpg" alt="header" class="img-responsive" width="780px" height="120px" usemap="#Map" />
+					<img src="./assets/images/header.jpg" alt="header" class="img-responsive" width="780px" height="120px" usemap="#Map" />
 				</div>
 			</div>
 			<div class="row">

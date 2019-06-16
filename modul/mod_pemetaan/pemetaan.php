@@ -1,5 +1,7 @@
-<?php
-	if (isset($_POST['submit'])) {
+<?php if (isset($_POST['submit'])) {
+		$lokasi_file		= $_FILES['image_1']['tmp_name'];
+		$image_1			= $_FILES['image_1']['name'];
+
 		$kode				= $_POST['kode'];
 		$program			= $_POST['program'];
 		$kegiatan			= $_POST['kegiatan'];
@@ -22,14 +24,15 @@
 		$lokasi 			= $_POST['lokasi'];
 		$koordinat_x		= $_POST['koordinat_x'];
 		$koordinat_y		= $_POST['koordinat_y'];
-		$penanggung_jawab	= $_POST['lokasi'];
-		$image_1			= $_POST['image_1'];
-		$image_2			= $_POST['image_2'];
-		$image_3			= $_POST['image_3'];
-		if ($image_1=="" OR $image_2=="" OR $image_3=="") { ?>
+		$penanggung_jawab	= $_POST['penanggung_jawab'];
+		$image_2			= "b";
+		$image_3			= "a";
+		// if ($image_1=="" OR $image_2=="" OR $image_3=="") {
+		if ($image_1=="") { ?>
 			<script>alert("Data tidak boleh kosong")</script>
 		<?php } else {
-			mysqli_query($koneksi, "INSERT INTO data_pekerjaan VALUES ('$kode','$program','$kegiatan', '$nama_pekerjaan', '$tahun_perolehan','$pagu_anggaran','$nomor_kontrak', '$nilai_kontrak', '$pelaksana', '$panjang', '$lebar', '$tinggi', '$satuan', '$jenis_pengadaan', '$waktu_pelaksanaan', '$status_kepemilikan', '$harga_perolehan', '$realisasi_keuangan', '$realisasi_fisik', '$lokasi', '$koordinat_x', '$koordinat_y', '$penanggung_jawab', '$image_1', '$image_2', '$image_3')"); ?>
+			UploadGambar($image_1);
+			mysqli_query($koneksi, "INSERT INTO data_pekerjaan (kode, program, kegiatan, nama_pekerjaan, tahun_perolehan, pagu_anggaran, nomor_kontrak, nilai_kontrak, pelaksana, panjang, lebar, tinggi, satuan, jenis_pengadaan, waktu_pelaksanaan, status_kepemilikan, harga_perolehan, realisasi_keuangan, realisasi_fisik, lokasi, koordinat_x, koordinat_y, penanggung_jawab, image_1, image_2, image_3) VALUES ('$kode','$program','$kegiatan', '$nama_pekerjaan', '$tahun_perolehan','$pagu_anggaran','$nomor_kontrak', '$nilai_kontrak', '$pelaksana', '$panjang', '$lebar', '$tinggi', '$satuan', '$jenis_pengadaan', '$waktu_pelaksanaan', '$status_kepemilikan', '$harga_perolehan', '$realisasi_keuangan', '$realisasi_fisik', '$lokasi', '$koordinat_x', '$koordinat_y', '$penanggung_jawab', '$image_1', '$image_2', '$image_3')"); ?>
 					<script language="javascript">document.location.href="?module=pemetaan"</script>
 		<?php }
 	}
@@ -43,7 +46,7 @@
 	}
 switch (isset($_GET['act'])) { default: ?>
 
-<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
+<script type="text/javascript" src="./assets/js/jquery-1.12.3.js"></script>
 <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFpkPVjM26Py4C4pDe9RiCVWPl4s_pXrw&callback=initMap"></script>
 <script type="text/javascript">
@@ -87,13 +90,13 @@ switch (isset($_GET['act'])) { default: ?>
 	function set_icon(jenisnya){
 	    switch(jenisnya){
 	        case "kelapa":
-	            gambar_tanda = 'images/location.png';
+	            gambar_tanda = './assets/images/location.png';
 	            break;
 	        case "kelapa_sawit":
-	            gambar_tanda = 'images/kelapa_sawit.png';
+	            gambar_tanda = './assets/images/kelapa_sawit.png';
 	            break;
 	        case  "karet":
-	            gambar_tanda = 'images/karet.png';
+	            gambar_tanda = './assets/images/karet.png';
 	            break;
 	    }
 	}
@@ -133,7 +136,7 @@ switch (isset($_GET['act'])) { default: ?>
 	}
 
 </script>
-	<form class="" action="?module=pemetaan" method="post">
+	<form action="?module=pemetaan" enctype="multipart/form-data" method="POST">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
@@ -147,7 +150,7 @@ switch (isset($_GET['act'])) { default: ?>
 			<div class="col-lg-12">
 				<div class="form-group">
 					<label>ICON PEKERJAAN</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="./images/location.png">
+					<img src="./assets/images/location.png">
 					<input type="radio" checked name="jenis" value="kelapa" onclick="setjenis(this.value)"> Bangunan
 					<!-- <img src="images/kelapa_sawit.png">
 					<input type="radio" name="jenis" value="kelapa_sawit" onclick="setjenis(this.value)"> Kelapa Sawit&nbsp;&nbsp;&nbsp;&nbsp;
@@ -163,9 +166,9 @@ switch (isset($_GET['act'])) { default: ?>
 				<div class="form-group">
 					<label>PROGRAM</label>
 					<select name="program" class="form-control">
-						<?php $jenis=mysqli_query($koneksi, "SELECT * FROM data_jenis_pengadaan ORDER BY jenis_pengadaan ASC");
-						while ($DJenis=mysqli_fetch_object($jenis)) { ?>
-						<option value="<?php echo $DJenis->id_bidang ?>"><?php echo $DJenis->jenis_pengadaan ?></option>
+						<?php $program=mysqli_query($koneksi, "SELECT * FROM data_program ORDER BY id_program ASC");
+						while ($DProgram=mysqli_fetch_object($program)) { ?>
+						<option value="<?php echo $DProgram->id_program ?>"><?php echo $DProgram->nama_program ?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -179,11 +182,11 @@ switch (isset($_GET['act'])) { default: ?>
 				</div>
 				<div class="form-group">
 					<label>TAHUN PEROLEHAN</label>
-					<input type="text" name="tahun_perolehan" class="form-control" placeholder="Input Tahun Perolehan">
+					<input type="number" name="tahun_perolehan" class="form-control" placeholder="Input Tahun Perolehan">
 				</div>
 				<div class="form-group">
 					<label>PAGU ANGGARAN</label>
-					<input type="text" name="pagu_anggaran" class="form-control" placeholder="Input Pagu Anggaran">
+					<input type="number" name="pagu_anggaran" class="form-control" placeholder="Input Pagu Anggaran">
 				</div>
 			</div>
 			<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
@@ -193,7 +196,7 @@ switch (isset($_GET['act'])) { default: ?>
 				</div>
 				<div class="form-group">
 					<label>NILAI KONTRAK</label>
-					<input type="text" name="nilai_kontrak" class="form-control" placeholder="Input Nilai Kontrak">
+					<input type="number" name="nilai_kontrak" class="form-control" placeholder="Input Nilai Kontrak">
 				</div>
 				<div class="form-group">
 					<label>PELAKSANA</label>
@@ -204,7 +207,7 @@ switch (isset($_GET['act'])) { default: ?>
 					<select name="jenis_pengadaan" class="form-control">
 						<?php $jenis=mysqli_query($koneksi, "SELECT * FROM data_jenis_pengadaan ORDER BY jenis_pengadaan ASC");
 						while ($DJenis=mysqli_fetch_object($jenis)) { ?>
-						<option value="<?php echo $DJenis->id_bidang ?>"><?php echo $DJenis->jenis_pengadaan ?></option>
+						<option value="<?php echo $DJenis->id_jenis_pengadaan ?>"><?php echo $DJenis->jenis_pengadaan ?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -220,15 +223,15 @@ switch (isset($_GET['act'])) { default: ?>
 				</div>
 				<div class="form-group">
 					<label>HARGA PEROLEHAN</label>
-					<input type="text" name="harga_perolehan" class="form-control" placeholder="Input Harga Perolehan">
+					<input type="number" name="harga_perolehan" class="form-control" placeholder="Input Harga Perolehan">
 				</div>
 				<div class="form-group">
 					<label>REALISASI KEUANGAN</label>
-					<input type="text" name="realisasi_keuangan" class="form-control" placeholder="Input Realisasi Keuangan">
+					<input type="number" name="realisasi_keuangan" class="form-control" placeholder="Input Realisasi Keuangan">
 				</div>
 				<div class="form-group">
 					<label>REALISASI FISIK</label>
-					<input type="text" name="realisasi_fisik" class="form-control" placeholder="Input Realisasi Fisik">
+					<input type="number" name="realisasi_fisik" class="form-control" placeholder="Input Realisasi Fisik">
 				</div>
 				<div class="form-group">
 					<label>LOKASI</label>
@@ -250,19 +253,19 @@ switch (isset($_GET['act'])) { default: ?>
 				<div class="form-group row">
 					<label class="col-lg-12">LUAS</label>
 					<div class="col-md-3">
-						<input type="text" name="panjang" class="form-control" placeholder="Panjang">
+						<input type="number" name="panjang" class="form-control" placeholder="Panjang">
 					</div>
 					<div class="col-md-3">
-						<input type="text" name="lebar" class="form-control" placeholder="Lebar">
+						<input type="number" name="lebar" class="form-control" placeholder="Lebar">
 					</div>
 					<div class="col-md-3">
-						<input type="text" name="tinggi" class="form-control" placeholder="Tinggi">
+						<input type="number" name="tinggi" class="form-control" placeholder="Tinggi">
 					</div>
 					<div class="col-md-3">
 						<select name="satuan" class="form-control">
 							<?php $satuan=mysqli_query($koneksi, "SELECT * FROM data_satuan ORDER BY satuan ASC");
 							while ($DSatuan=mysqli_fetch_object($satuan)) { ?>
-							<option value=""><?php echo $DSatuan->satuan ?></option>
+							<option value="<?php echo $DSatuan->id_satuan ?>"><?php echo $DSatuan->satuan ?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -286,7 +289,7 @@ switch (isset($_GET['act'])) { default: ?>
 				<div class="form-group row">
 					<label class="col-lg-12">FOTO KEGIATAN</label>
 					<div class="col-md-4">
-						<input type="file" name="image_1" class="form-control">
+						<input type="file" name="image_1" class="form-control" required>
 					</div>
 					<div class="col-md-4">
 						<input type="file" name="image_2" class="form-control">
@@ -326,10 +329,10 @@ switch (isset($_GET['act'])) { default: ?>
 						<thead class="text-nowrap text-uppercase">
 							<tr class="success">
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">No</th>
-								<th class="text-center" style="vertical-align: middle;" rowspan="3">Kode / Program dan Kegiatan</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3" colspan="3">Kode / Program dan Kegiatan</th>
 								<th class="text-center" style="vertical-align: middle;" colspan="2">Urian</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pagu Anggaran</th>
-								<th class="text-center" style="vertical-align: middle;" rowspan="3">Nomor dan Nilai Kontrak</th>
+								<th class="text-center" style="vertical-align: middle;" rowspan="3" colspan="2">Nomor dan Nilai Kontrak</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pelaksana</th>
 								<th class="text-center" style="vertical-align: middle;" colspan="5">Dimensi</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">Jenis Pengadaan</th>
@@ -360,11 +363,11 @@ switch (isset($_GET['act'])) { default: ?>
 							</tr>
 							<tr class="danger">
 								<th class="text-center">1</th>
-								<th class="text-center">2</th>
+								<th class="text-center" colspan="3">2</th>
 								<th class="text-center">3</th>
 								<th class="text-center">4</th>
 								<th class="text-center">5</th>
-								<th class="text-center">6</th>
+								<th class="text-center" colspan="2">6</th>
 								<th class="text-center">7</th>
 								<th class="text-center">8</th>
 								<th class="text-center">9</th>
@@ -384,23 +387,70 @@ switch (isset($_GET['act'])) { default: ?>
 							</tr>
 						</thead>
 						<tbody>
-							<?php $query=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan ORDER BY id_pekerjaan");
+							<?php $query=mysqli_query($koneksi, "Select
+							    data_pekerjaan.kode,
+							    data_program.nama_program,
+							    data_pekerjaan.kegiatan,
+							    data_pekerjaan.nama_pekerjaan,
+							    data_pekerjaan.tahun_perolehan,
+							    data_pekerjaan.pagu_anggaran,
+							    data_pekerjaan.nomor_kontrak,
+							    data_pekerjaan.nilai_kontrak,
+							    data_pekerjaan.pelaksana,
+							    data_pekerjaan.panjang,
+							    data_pekerjaan.lebar,
+							    data_pekerjaan.tinggi,
+							    data_satuan.satuan,
+							    data_jenis_pengadaan.jenis_pengadaan,
+							    data_pekerjaan.waktu_pelaksanaan,
+							    data_pekerjaan.status_kepemilikan,
+							    data_pekerjaan.harga_perolehan,
+							    data_pekerjaan.realisasi_keuangan,
+							    data_pekerjaan.realisasi_fisik,
+							    data_pekerjaan.lokasi,
+							    data_pekerjaan.koordinat_x,
+							    data_pekerjaan.koordinat_y,
+							    data_bidang.nama_pendek_bidang,
+							    data_pekerjaan.image_1,
+							    data_pekerjaan.image_2,
+							    data_pekerjaan.image_3
+							From
+							    data_pekerjaan Inner Join
+							    data_bidang On data_pekerjaan.penanggung_jawab = data_bidang.id_bidang Inner Join
+							    data_jenis_pengadaan On data_pekerjaan.jenis_pengadaan = data_jenis_pengadaan.id_jenis_pengadaan Inner Join
+							    data_program On data_pekerjaan.program = data_program.id_program Inner Join
+							    data_satuan On data_pekerjaan.satuan = data_satuan.id_satuan ORDER BY id_pekerjaan");
 								$no=1;
-								while ($data=mysqli_fetch_assoc($query)) { ?>
+								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>
-								<td><?php echo $no++ ?></td>
-								<td><?php echo $data["id_pemetaan"] ?></td>
-								<td><?php echo $data["nama_triwulan"] ?></td>
-								<td><?php echo $data["nama_komoditi"] ?></td>
-								<td><?php echo $data["nama_penyakit"] ?></td>
-								<td><?php echo $data["nama_kabupaten"] ?></td>
-								<td><?php echo $data["luas_komoditas"] ?></td>
-								<td><?php echo $data["luas_serangan_ringan"] ?></td>
-								<td><?php echo $data["luas_serangan_berat"] ?></td>
-								<td><?php echo $data["jumlah"] ?></td>
+								<td class="text-center"><?php echo $no++ ?></td>
+								<td><?php echo $data->kode ?></td>
+								<td><?php echo $data->nama_program ?></td>
+								<td><?php echo $data->kegiatan ?></td>
+								<td><?php echo $data->nama_pekerjaan ?></td>
+								<td class="text-center"><?php echo $data->tahun_perolehan ?></td>
+								<td><?php echo "Rp ".number_format($data->pagu_anggaran) ?></td>
+								<td><?php echo $data->nomor_kontrak ?></td>
+								<td class="text-right"><?php echo "Rp ".number_format($data->nilai_kontrak) ?></td>
+								<td><?php echo $data->pelaksana ?></td>
+								<td class="text-center"><?php echo $data->panjang ?></td>
+								<td class="text-center"><?php echo $data->lebar ?></td>
+								<td class="text-center"><?php echo $data->tinggi ?></td>
+								<td class="text-center"><?php echo $data->panjang*$data->lebar*$data->tinggi ?></td>
+								<td><?php echo $data->satuan ?></td>
+								<td><?php echo $data->jenis_pengadaan ?></td>
+								<td><?php echo $data->waktu_pelaksanaan ?></td>
+								<td><?php echo $data->status_kepemilikan ?></td>
+								<td class="text-right"><?php echo "Rp ".number_format($data->harga_perolehan) ?></td>
+								<td class="text-right"><?php echo "Rp ".number_format($data->realisasi_keuangan) ?></td>
+								<td class="text-center"><?php echo ($data->realisasi_keuangan/$data->harga_perolehan)*100,"%" ?></td>
+								<td class="text-center"><?php echo $data->realisasi_fisik."%" ?></td>
+								<td><?php echo $data->lokasi ?></td>
+								<td><?php echo $data->koordinat_x."|".$data->koordinat_y ?></td>
+								<td><?php echo $data->nama_pendek_bidang ?></td>
 								<td>
-									<!--a href="?module=pengendalian&act=update&id_pengendalian=<?php //echo $data[id_pengendalian] ?>"><span class="glyphicon glyphicon-edit"></a></span>-->
-									<a href="?module=pemetaan&mode=delete&id_pemetaan=<?php echo $data[id_pemetaan] ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
+									<a href="?module=pemetaan&act=update&id_pekerjaan=<?php echo $data->id_pekerjaan ?>"><span class="glyphicon glyphicon-edit"></a></span>
+									<a href="?module=pemetaan&mode=delete&id_pekerjaan=<?php echo $data->id_pekerjaan ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
 								</td>
 							</tr>
 							<?php } ?>
