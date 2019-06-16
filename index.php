@@ -68,7 +68,7 @@
 			<?php include "content.php" ?>
 
 			<div class="panel-footer">
-				<p>supported by <a href="https://wa.me/6285746080544?text=Assalamualaikum%2C%20salam%20kenal%20HENDRI%20ARIFIN%2C%20S.Kom%20%F0%9F%98%81">Computer Media Utama</a></p>
+				<p>supported by <a href="https://wa.me/6285746080544?text=Assalamualaikum%2C%20salam%20kenal%20HENDRI%20ARIFIN%2C%20S.Kom%20%F0%9F%98%81">Hendri Arifin, S.Kom - 085746080544</a></p>
 			</div>
 		</div>
 	</body>
