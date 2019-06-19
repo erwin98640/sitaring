@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h1 class="text-center bg-info" style="padding: 10px 0 10px 0">SITARING HAJA <br>
-        <small>Sistem Informasi Identifikasi Data Monitoring Hasil Pekerjaan</small></h1><br><br>
+        <small>Sistem Informasi Inventarisasi Data Monitoring Hasil Pekerjaan</small></h1><br><br>
     <div class="row">
         <div class="col-lg-12">
 			<div class="judul" style="margin-bottom: 10px">

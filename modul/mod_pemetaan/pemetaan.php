@@ -330,7 +330,7 @@ switch (isset($_GET['act'])) { default: ?>
 							<tr class="success">
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">No</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3" colspan="3">Kode / Program dan Kegiatan</th>
-								<th class="text-center" style="vertical-align: middle;" colspan="2">Urian</th>
+								<th class="text-center" style="vertical-align: middle;" colspan="2">Uraian</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pagu Anggaran</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3" colspan="2">Nomor dan Nilai Kontrak</th>
 								<th class="text-center" style="vertical-align: middle;" rowspan="3">Pelaksana</th>
