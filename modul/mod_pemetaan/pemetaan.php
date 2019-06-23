@@ -46,7 +46,8 @@
 	}
 switch (isset($_GET['act'])) { default: ?>
 
-<script type="text/javascript" src="./assets/js/jquery-1.12.3.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
+<script type="text/javascript" src="assets/js/jquery-1.12.3.js"></script>
 <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFpkPVjM26Py4C4pDe9RiCVWPl4s_pXrw&callback=initMap"></script>
 <script type="text/javascript">
@@ -54,17 +55,17 @@ switch (isset($_GET['act'])) { default: ?>
 	var jenis = "kelapa";
 	
 	function carikordinat(){
-	    var jakarta = new google.maps.LatLng(-2.8497764266656023, 115.49523923546076);
-	    var petaoption = {
-	        zoom: 8,
-	        center: jakarta,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP
-	        };
-	    peta = new google.maps.Map(document.getElementById("kanvaspeta"),petaoption);
-	    google.maps.event.addListener(peta,'click',function(event){
-	        kasihtanda(event.latLng);
-	    });
-	    ambildatabase('awal');
+		var jakarta = new google.maps.LatLng(-2.8497764266656023, 115.49523923546076);
+		var petaoption = {
+			zoom: 8,
+			center: jakarta,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+		peta = new google.maps.Map(document.getElementById("kanvaspeta"),petaoption);
+		google.maps.event.addListener(peta,'click',function(event){
+			kasihtanda(event.latLng);
+		});
+		ambildatabase('awal');
 		
 		/*untuk tgl*/
 		// new JsDatePick({
@@ -75,40 +76,39 @@ switch (isset($_GET['act'])) { default: ?>
 	}
 
 	function kasihtanda(lokasi){
-	    set_icon(jenis);
-	    tanda = new google.maps.Marker({
-	            position: lokasi,
-	            map: peta,
-	            icon: gambar_tanda,
-    			scaleSize: 37
-	    });
-	    $("#x").val(lokasi.lat());
-	    $("#y").val(lokasi.lng());
+		set_icon(jenis);
+		tanda = new google.maps.Marker({
+				position: lokasi,
+				map: peta,
+				icon: gambar_tanda,
+				scaleSize: 37
+		});
+		$("#x").val(lokasi.lat());
+		$("#y").val(lokasi.lng());
 
 	}
 
 	function set_icon(jenisnya){
-	    switch(jenisnya){
-	        case "kelapa":
-	            gambar_tanda = './assets/images/location.png';
-	            break;
-	        case "kelapa_sawit":
-	            gambar_tanda = './assets/images/kelapa_sawit.png';
-	            break;
-	        case  "karet":
-	            gambar_tanda = './assets/images/karet.png';
-	            break;
-	    }
+		switch(jenisnya){
+			case "kelapa":
+				gambar_tanda = './assets/images/location.png';
+				break;
+			case "kelapa_sawit":
+				gambar_tanda = './assets/images/kelapa_sawit.png';
+				break;
+			case  "karet":
+				gambar_tanda = './assets/images/karet.png';
+				break;
+		}
 	}
 
 	function setjenis(jns){
-	    jenis = jns;
+		jenis = jns;
 	}
 
-	function ambildatabase(akhir){
-		// url = "modul/mod_pemetaan/ambildata.php";
-		// url = "?module=ambildata.php";
-		url = "ambildata.php";
+	function ambildatabase(awal){
+		url = "modul/mod_pemetaan/ambildata.php";
+		// url = "ambildata.php";
 		$.ajax({
 			url: url,
 			dataType: 'json',
@@ -388,38 +388,38 @@ switch (isset($_GET['act'])) { default: ?>
 						</thead>
 						<tbody>
 							<?php $query=mysqli_query($koneksi, "Select
-							    data_pekerjaan.kode,
-							    data_program.nama_program,
-							    data_pekerjaan.kegiatan,
-							    data_pekerjaan.nama_pekerjaan,
-							    data_pekerjaan.tahun_perolehan,
-							    data_pekerjaan.pagu_anggaran,
-							    data_pekerjaan.nomor_kontrak,
-							    data_pekerjaan.nilai_kontrak,
-							    data_pekerjaan.pelaksana,
-							    data_pekerjaan.panjang,
-							    data_pekerjaan.lebar,
-							    data_pekerjaan.tinggi,
-							    data_satuan.satuan,
-							    data_jenis_pengadaan.jenis_pengadaan,
-							    data_pekerjaan.waktu_pelaksanaan,
-							    data_pekerjaan.status_kepemilikan,
-							    data_pekerjaan.harga_perolehan,
-							    data_pekerjaan.realisasi_keuangan,
-							    data_pekerjaan.realisasi_fisik,
-							    data_pekerjaan.lokasi,
-							    data_pekerjaan.koordinat_x,
-							    data_pekerjaan.koordinat_y,
-							    data_bidang.nama_pendek_bidang,
-							    data_pekerjaan.image_1,
-							    data_pekerjaan.image_2,
-							    data_pekerjaan.image_3
+								data_pekerjaan.kode,
+								data_program.nama_program,
+								data_pekerjaan.kegiatan,
+								data_pekerjaan.nama_pekerjaan,
+								data_pekerjaan.tahun_perolehan,
+								data_pekerjaan.pagu_anggaran,
+								data_pekerjaan.nomor_kontrak,
+								data_pekerjaan.nilai_kontrak,
+								data_pekerjaan.pelaksana,
+								data_pekerjaan.panjang,
+								data_pekerjaan.lebar,
+								data_pekerjaan.tinggi,
+								data_satuan.satuan,
+								data_jenis_pengadaan.jenis_pengadaan,
+								data_pekerjaan.waktu_pelaksanaan,
+								data_pekerjaan.status_kepemilikan,
+								data_pekerjaan.harga_perolehan,
+								data_pekerjaan.realisasi_keuangan,
+								data_pekerjaan.realisasi_fisik,
+								data_pekerjaan.lokasi,
+								data_pekerjaan.koordinat_x,
+								data_pekerjaan.koordinat_y,
+								data_bidang.nama_pendek_bidang,
+								data_pekerjaan.image_1,
+								data_pekerjaan.image_2,
+								data_pekerjaan.image_3
 							From
-							    data_pekerjaan Inner Join
-							    data_bidang On data_pekerjaan.penanggung_jawab = data_bidang.id_bidang Inner Join
-							    data_jenis_pengadaan On data_pekerjaan.jenis_pengadaan = data_jenis_pengadaan.id_jenis_pengadaan Inner Join
-							    data_program On data_pekerjaan.program = data_program.id_program Inner Join
-							    data_satuan On data_pekerjaan.satuan = data_satuan.id_satuan ORDER BY id_pekerjaan");
+								data_pekerjaan Inner Join
+								data_bidang On data_pekerjaan.penanggung_jawab = data_bidang.id_bidang Inner Join
+								data_jenis_pengadaan On data_pekerjaan.jenis_pengadaan = data_jenis_pengadaan.id_jenis_pengadaan Inner Join
+								data_program On data_pekerjaan.program = data_program.id_program Inner Join
+								data_satuan On data_pekerjaan.satuan = data_satuan.id_satuan ORDER BY id_pekerjaan");
 								$no=1;
 								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>

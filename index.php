@@ -14,15 +14,15 @@
 				window.location.reload(true);
 				}
 		</script>
-		<script src="js/highcharts.js" type="text/javascript"></script>
+		<!-- <script src="js/highcharts.js" type="text/javascript"></script> -->
 		<link rel="stylesheet" href="./assets/css/bootstrap.css">
 
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
-		     (adsbygoogle = window.adsbygoogle || []).push({
-		          google_ad_client: "ca-pub-2586125774271995",
-		          enable_page_level_ads: true
-		     });
+			(adsbygoogle = window.adsbygoogle || []).push({
+				google_ad_client: "ca-pub-2586125774271995",
+				enable_page_level_ads: true
+			});
 		</script>
 	</head>
 	<body onload="carikordinat()">
