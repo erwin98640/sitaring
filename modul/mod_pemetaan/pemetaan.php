@@ -38,12 +38,10 @@
 	}
 
 	if(isset($_GET['mode'])=='delete'){
-		$id_pemetaan=$_GET['id_pemetaan'];
-		mysqli_query($koneksi, "delete from tpemetaan where id_pemetaan='$id_pemetaan'");
-		?>
+		$id_pekerjaan=$_GET['id_pekerjaan'];
+		mysqli_query($koneksi, "DELETE FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'"); ?>
 			<script language="javascript">document.location.href="?module=pemetaan"</script>
-		<?php
-	}
+	<?php }
 switch (isset($_GET['act'])) { default: ?>
 
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
@@ -75,6 +73,86 @@ switch (isset($_GET['act'])) { default: ?>
 		// });
 	}
 
+
+
+	$(document).ready(function(){
+    $("#tombol_simpan").click(function(){
+        var x = $("#x").val();
+        var y = $("#y").val();
+        var judul = $("#judul").val();
+        var des = $("#deskripsi").val();
+		
+		var id_info = $("#id_info").val();
+		var id_prov = $("#id_prov").val();
+		var id_bencana = $("#id_bencana").val();
+		
+		var korban = $("#korban").val();
+		var penyebab = $("#penyebab").val();
+		var tgl = $("#tgl").val();
+		
+        $("#loading").show();
+        $.ajax({
+            url: "simpanlokasi.php",
+            data: "x="+x+"&y="+y+"&jenis="+jenis+"&id_info="+id_info+"&id_prov="+id_prov+"&id_bencana="+id_bencana+"&korban="+korban+"&penyebab="+penyebab+"&tgl="+tgl,
+            cache: false,
+            success: function(msg){
+                alert(msg);
+                $("#loading").hide();
+                $("#x").val("");
+                $("#y").val("");
+				$("#id_info").val("");
+				$("#korban").val("");
+				$("#penyebab").val("");
+				$("#tgl").val("");
+                ambildatabase('akhir');
+				document.location.href='?page=info-bencana';
+            }
+        });
+    });
+    $("#tutup").click(function(){
+        $("#jendelainfo").fadeOut();
+    });
+});
+
+
+$(document).ready(function(){
+    $("#tombol_simpan").click(function(){
+        var x = $("#x").val();
+        var y = $("#y").val();
+        var judul = $("#judul").val();
+        var des = $("#deskripsi").val();
+		
+		var id_info = $("#id_info").val();
+		var id_prov = $("#id_prov").val();
+		var id_bencana = $("#id_bencana").val();
+		
+		var korban = $("#korban").val();
+		var penyebab = $("#penyebab").val();
+		var tgl = $("#tgl").val();
+		
+        $("#loading").show();
+        $.ajax({
+            url: "simpanlokasi.php",
+            data: "x="+x+"&y="+y+"&jenis="+jenis+"&id_info="+id_info+"&id_prov="+id_prov+"&id_bencana="+id_bencana+"&korban="+korban+"&penyebab="+penyebab+"&tgl="+tgl,
+            cache: false,
+            success: function(msg){
+                alert(msg);
+                $("#loading").hide();
+                $("#x").val("");
+                $("#y").val("");
+				$("#id_info").val("");
+				$("#korban").val("");
+				$("#penyebab").val("");
+				$("#tgl").val("");
+                ambildatabase('akhir');
+				document.location.href='?page=info-bencana';
+            }
+        });
+    });
+    $("#tutup").click(function(){
+        $("#jendelainfo").fadeOut();
+    });
+});
 	function kasihtanda(lokasi){
 		set_icon(jenis);
 		tanda = new google.maps.Marker({
@@ -125,6 +203,7 @@ switch (isset($_GET['act'])) { default: ?>
 						map: peta,
 						icon: gambar_tanda
 					});
+					setinfo(tanda,i);
 				}
 			}
 		});
@@ -132,10 +211,50 @@ switch (isset($_GET['act'])) { default: ?>
 
 	function setinfo(petak, nomor){
 		google.maps.event.addListener(petak, 'click', function() {
+			$("#jendelainfo").fadeIn();
+			// $("#teksjudul").html(judulx[nomor]);
+			// $("#teksdes").html(desx[nomor]);
+			// $("#teksprov").html(provx[nomor]);
+			// $("#teksbencana").html(bencanax[nomor]);
+			// $("#teksid_info").html(id_infox[nomor]);
+			// $("#tekskorban").html(korbanx[nomor]);
+			// $("#tekspenyebab").html(penyebabx[nomor]);
+			// $("#tekstgl").html(tglx[nomor]);
+			
+			// $("#tekskoorx").html(koorx[nomor]);
+			// $("#tekskoory").html(koory[nomor]);
 		});
 	}
-
 </script>
+
+
+<style>
+/* #jendelainfo{position:absolute;z-index:1000;top:100; */
+/* left:400;background-color:yellow;display:none;} */
+</style>
+</head>
+<!-- <body onload="peta_awal()">
+<center>
+<table id="jendelainfo" border="0" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#FFCC00" height="140">
+  <tr>
+    <td width="248" bgcolor="#000000" height="19"><font color=white>ID Info : <span id="teksid_info"></span></font></td>
+    <td width="30" bgcolor="#000000" height="19">
+    <p align="center"><font color="#FFFFFF"><a style="cursor:pointer" id="tutup"><b>X</b></a></font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFCC00" valign="top" colspan="2"> 
+    Provinsi : <span id="teksprov"></span><br>
+	Bencana : <span id="teksbencana"></span><br>
+	Tanggal : <span id="tekstgl"></span><br>
+	Korban : <span id="tekskorban"></span><br>
+	Penyebab : <span id="tekspenyebab"></span><br>
+	
+	Koor X : <span id="tekskoorx"></span><br>
+	Koor Y : <span id="tekskoory"></span><br>
+	</td>
+  </tr>
+</table> -->
+
 	<form action="?module=pemetaan" enctype="multipart/form-data" method="POST">
 	<div class="container-fluid">
 		<div class="row">
@@ -275,11 +394,11 @@ switch (isset($_GET['act'])) { default: ?>
 				<div class="form-group row">
 					<div class="col-lg-6">
 						<label>KOORDINAT X</label>
-						<input type="text" class="form-control" readonly="readonly" name="koordinat_x" id="x" value="" placeholder="koordinat x">
+						<input type="text" class="form-control" name="koordinat_x" id="x" value="" placeholder="koordinat x">
 					</div>
 					<div class="col-lg-6">
 						<label>KOORDINAT Y</label>
-						<input type="text" class="form-control" readonly="readonly" name="koordinat_y" id="y" value="" placeholder="koordinat y">
+						<input type="text" class="form-control" name="koordinat_y" id="y" value="" placeholder="koordinat y">
 					</div>
 				</div>
 			</div>
@@ -289,7 +408,7 @@ switch (isset($_GET['act'])) { default: ?>
 				<div class="form-group row">
 					<label class="col-lg-12">FOTO KEGIATAN</label>
 					<div class="col-md-4">
-						<input type="file" name="image_1" class="form-control" required>
+						<input type="file" name="image_1" class="form-control">
 					</div>
 					<div class="col-md-4">
 						<input type="file" name="image_2" class="form-control">
@@ -388,6 +507,7 @@ switch (isset($_GET['act'])) { default: ?>
 						</thead>
 						<tbody>
 							<?php $query=mysqli_query($koneksi, "Select
+								data_pekerjaan.id_pekerjaan,
 								data_pekerjaan.kode,
 								data_program.nama_program,
 								data_pekerjaan.kegiatan,
@@ -449,8 +569,8 @@ switch (isset($_GET['act'])) { default: ?>
 								<td><?php echo $data->koordinat_x."|".$data->koordinat_y ?></td>
 								<td><?php echo $data->nama_pendek_bidang ?></td>
 								<td>
-									<a href="?module=pemetaan&act=update&id_pekerjaan=<?php echo $data->id_pekerjaan ?>"><span class="glyphicon glyphicon-edit"></a></span>
-									<a href="?module=pemetaan&mode=delete&id_pekerjaan=<?php echo $data->id_pekerjaan ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
+									<a href="?module=pemetaan&act=update&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>"><span class="glyphicon glyphicon-edit"></a></span>
+									<a href="?module=pemetaan&mode=delete&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
 								</td>
 							</tr>
 							<?php } ?>
