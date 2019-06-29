@@ -26,8 +26,6 @@
 		<script language="javascript">document.location.href="?module=pemetaan"</script>
 
 	<?php } if (isset($_POST['update'])) {
-		// $lokasi_file_1		= $_FILES['image_1']['tmp_name'];
-		// $image_1			= $_FILES['image_1']['name'];
 		// $lokasi_file_2		= $_FILES['image_2']['tmp_name'];
 		// $image_2			= $_FILES['image_2']['name'];
 		// $lokasi_file_2		= $_FILES['image_3']['tmp_name'];
@@ -59,6 +57,63 @@
 			mysqli_query($koneksi, "UPDATE data_pekerjaan SET kode='$kode', program='$program', kegiatan='$kegiatan', nama_pekerjaan='$nama_pekerjaan', tahun_perolehan='$tahun_perolehan', pagu_anggaran='$pagu_anggaran', nomor_kontrak='$nomor_kontrak', nilai_kontrak='$nilai_kontrak', pelaksana='$pelaksana', panjang='$panjang', lebar='$lebar', tinggi='$tinggi', satuan='$satuan', jenis_pengadaan='$jenis_pengadaan', waktu_pelaksanaan='$waktu_pelaksanaan', status_kepemilikan='$status_kepemilikan', harga_perolehan='$harga_perolehan', realisasi_keuangan='$realisasi_keuangan', realisasi_fisik='$realisasi_fisik', lokasi='$lokasi', koordinat_x='$koordinat_x', koordinat_y='$koordinat_y', penanggung_jawab='$penanggung_jawab' WHERE id_pekerjaan='$_POST[id_pekerjaan]'"); ?>
 			<script language="javascript">document.location.href="?module=pemetaan"</script>
 	<?php }
+
+	if (isset($_POST['image1'])){
+		$id_pekerjaan	= $_POST['id_pekerjaan'];
+		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
+		$image_1		= $_FILES['image_1']['name'];
+		UploadGambar($image_1);
+
+		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
+		$cek=mysqli_fetch_array($a);
+
+		$imageOri="assets/images/kegiatan/$cek[image_1]";
+		$imageSmall="assets/images/kegiatan/small_$cek[image_1]";
+		$imageMedium="assets/images/kegiatan/medium_$cek[image_1]";
+		unlink($imageOri);
+		unlink($imageSmall);
+		unlink($imageMedium);
+		
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_1='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+	}
+
+	if (isset($_POST['image2'])){
+		$id_pekerjaan	= $_POST['id_pekerjaan'];
+		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
+		$image_1		= $_FILES['image_1']['name'];
+		UploadGambar($image_1);
+
+		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
+		$cek=mysqli_fetch_array($a);
+
+		$imageOri="assets/images/kegiatan/$cek[image_2]";
+		$imageSmall="assets/images/kegiatan/small_$cek[image_2]";
+		$imageMedium="assets/images/kegiatan/medium_$cek[image_2]";
+		unlink($imageOri);
+		unlink($imageSmall);
+		unlink($imageMedium);
+
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_2='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+	}
+
+	if (isset($_POST['image3'])){
+		$id_pekerjaan	= $_POST['id_pekerjaan'];
+		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
+		$image_1		= $_FILES['image_1']['name'];
+		UploadGambar($image_1);
+
+		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
+		$cek=mysqli_fetch_array($a);
+
+		$imageOri="assets/images/kegiatan/$cek[image_3]";
+		$imageSmall="assets/images/kegiatan/small_$cek[image_3]";
+		$imageMedium="assets/images/kegiatan/medium_$cek[image_3]";
+		unlink($imageOri);
+		unlink($imageSmall);
+		unlink($imageMedium);
+
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_3='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+	}
 
 	if(isset($_GET['mode'])=='delete'){
 		$id_pekerjaan=$_GET['id_pekerjaan'];
@@ -551,7 +606,7 @@ $(document).ready(function(){
 								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>
 								<td class="text-center"><?php echo $no++ ?></td>
-								<td><?php echo "<a href='#' data-toggle='modal' data-target='#myModal'>".$data->kode."</a>" ?></td>
+								<td><?php echo "<label data-toggle='modal' data-target='#$data->id_pekerjaan' class='text-primary' style='cursor: pointer'>".$data->kode."</label>" ?></td>
 								<td><?php echo $data->nama_program ?></td>
 								<td><?php echo $data->kegiatan ?></td>
 								<td><?php echo $data->nama_pekerjaan ?></td>
@@ -579,49 +634,70 @@ $(document).ready(function(){
 									<a href="?module=pemetaan&act=update&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>"><span class="glyphicon glyphicon-edit"></a></span>
 									<a href="?module=pemetaan&mode=delete&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
 								</td>
-							</tr>
+								<!-- Modal -->
+								<div class="modal fade" id="<?= $data->id_pekerjaan ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Gambar Kegiatan</h4>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+														<a href="./assets/images/kegiatan/<?= $data->image_1 ?>" target="_blank" class="thumbnail">
+															<?php if (empty($data->image_1)) { ?>
+																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+																<?php } else { ?>
+																<img src="./assets/images/kegiatan/small_<?= $data->image_1 ?>" alt="<?= $data->nama_pekerjaan ?>">
+															<?php } ?>
+														</a>
+														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+															<input type="file" name="image_1" class="form-control"> <br>
+															<input type="submit" name="image1" value="upload" class="btn btn-sm btn-success btn-block">
+														</form>
+													</div>
+													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+														<a href="./assets/images/kegiatan/<?= $data->image_2 ?>" target="_blank" class="thumbnail">
+															<?php if (empty($data->image_2)) { ?>
+																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+																<?php } else { ?>
+																<img src="./assets/images/kegiatan/small_<?= $data->image_2 ?>" alt="<?= $data->nama_pekerjaan ?>">
+															<?php } ?>
+														</a>
+														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+															<input type="file" name="image_1" class="form-control"> <br>
+															<input type="submit" name="image2" value="upload" class="btn btn-sm btn-success btn-block">
+														</form>
+													</div>
+													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+														<a href="./assets/images/kegiatan/<?= $data->image_3 ?>" target="_blank" class="thumbnail">
+															<?php if (empty($data->image_3)) { ?>
+																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+																<?php } else { ?>
+																<img src="./assets/images/kegiatan/small_<?= $data->image_3 ?>" alt="<?= $data->nama_pekerjaan ?>">
+															<?php } ?>
+														</a>
+														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+															<input type="file" name="image_1" class="form-control"> <br>
+															<input type="submit" name="image3" value="upload" class="btn btn-sm btn-success btn-block">
+														</form>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							<?php } ?>
+							</tr>
 						</tbody>
 					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Gambar Kegiatan</h4>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<a href="#" class="thumbnail">
-								<img src="./assets/images/kegiatan/no-image.png" alt="...">
-							</a>
-							<input type="file" name="image_1" class="form-control"> <br>
-							<input type="submit" value="upload" class="btn btn-sm btn-success btn-block">
-						</div>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<a href="#" class="thumbnail">
-								<img src="./assets/images/kegiatan/no-image.png" alt="...">
-							</a>
-							<input type="file" name="image_2" class="form-control"> <br>
-							<input type="submit" value="upload" class="btn btn-sm btn-success btn-block">
-						</div>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-							<a href="#" class="thumbnail">
-								<img src="./assets/images/kegiatan/no-image.png" alt="...">
-							</a>
-							<input type="file" name="image_3" class="form-control"> <br>
-							<input type="submit" value="upload" class="btn btn-sm btn-success btn-block">
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -666,7 +742,7 @@ $(document).ready(function(){
 		data_program ON data_pekerjaan.program = data_program.id_program INNER JOIN
 		data_satuan ON data_pekerjaan.satuan = data_satuan.id_satuan WHERE id_pekerjaan='$_GET[id_pekerjaan]'");
 	$data=mysqli_fetch_object($query) ?>
-	<form action="?module=pemetaan" enctype="multipart/form-data" method="POST">
+	<form action="?module=pemetaan" method="POST">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
