@@ -606,7 +606,7 @@ $(document).ready(function(){
 								while ($data=mysqli_fetch_object($query)) { ?>
 							<tr>
 								<td class="text-center"><?php echo $no++ ?></td>
-								<td><?php echo "<label data-toggle='modal' data-target='#$data->id_pekerjaan' class='text-primary' style='cursor: pointer'>".$data->kode."</label>" ?></td>
+								<td class="text-nowrap"><?php echo "<label data-toggle='modal' data-target='#$data->id_pekerjaan' class='text-primary' style='cursor: pointer'>".$data->kode."</label>" ?></td>
 								<td><?php echo $data->nama_program ?></td>
 								<td><?php echo $data->kegiatan ?></td>
 								<td><?php echo $data->nama_pekerjaan ?></td>
@@ -634,68 +634,68 @@ $(document).ready(function(){
 									<a href="?module=pemetaan&act=update&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>"><span class="glyphicon glyphicon-edit"></a></span>
 									<a href="?module=pemetaan&mode=delete&id_pekerjaan=<?php echo $data->id_pekerjaan; ?>" onclick="return confirm('Apakah Anda Yakin ?')"><span class="glyphicon glyphicon-trash"></a></span>
 								</td>
-								<!-- Modal -->
-								<div class="modal fade" id="<?= $data->id_pekerjaan ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title" id="myModalLabel">Gambar Kegiatan</h4>
-											</div>
-											<div class="modal-body">
-												<div class="row">
-													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-														<a href="./assets/images/kegiatan/<?= $data->image_1 ?>" target="_blank" class="thumbnail">
-															<?php if (empty($data->image_1)) { ?>
-																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
-																<?php } else { ?>
-																<img src="./assets/images/kegiatan/small_<?= $data->image_1 ?>" alt="<?= $data->nama_pekerjaan ?>">
-															<?php } ?>
-														</a>
-														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
-															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
-															<input type="file" name="image_1" class="form-control"> <br>
-															<input type="submit" name="image1" value="upload" class="btn btn-sm btn-success btn-block">
-														</form>
-													</div>
-													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-														<a href="./assets/images/kegiatan/<?= $data->image_2 ?>" target="_blank" class="thumbnail">
-															<?php if (empty($data->image_2)) { ?>
-																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
-																<?php } else { ?>
-																<img src="./assets/images/kegiatan/small_<?= $data->image_2 ?>" alt="<?= $data->nama_pekerjaan ?>">
-															<?php } ?>
-														</a>
-														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
-															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
-															<input type="file" name="image_1" class="form-control"> <br>
-															<input type="submit" name="image2" value="upload" class="btn btn-sm btn-success btn-block">
-														</form>
-													</div>
-													<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-														<a href="./assets/images/kegiatan/<?= $data->image_3 ?>" target="_blank" class="thumbnail">
-															<?php if (empty($data->image_3)) { ?>
-																<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
-																<?php } else { ?>
-																<img src="./assets/images/kegiatan/small_<?= $data->image_3 ?>" alt="<?= $data->nama_pekerjaan ?>">
-															<?php } ?>
-														</a>
-														<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
-															<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
-															<input type="file" name="image_1" class="form-control"> <br>
-															<input type="submit" name="image3" value="upload" class="btn btn-sm btn-success btn-block">
-														</form>
-													</div>
+							</tr>
+							<!-- Modal -->
+							<div class="modal fade" id="<?= $data->id_pekerjaan ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Gambar Kegiatan</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<a href="./assets/images/kegiatan/<?= $data->image_1 ?>" target="_blank" class="thumbnail">
+														<?php if (empty($data->image_1)) { ?>
+															<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+															<?php } else { ?>
+															<img src="./assets/images/kegiatan/small_<?= $data->image_1 ?>" alt="<?= $data->nama_pekerjaan ?>">
+														<?php } ?>
+													</a>
+													<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+														<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+														<input type="file" name="image_1" class="form-control"> <br>
+														<input type="submit" name="image1" value="upload" class="btn btn-sm btn-success btn-block">
+													</form>
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<a href="./assets/images/kegiatan/<?= $data->image_2 ?>" target="_blank" class="thumbnail">
+														<?php if (empty($data->image_2)) { ?>
+															<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+															<?php } else { ?>
+															<img src="./assets/images/kegiatan/small_<?= $data->image_2 ?>" alt="<?= $data->nama_pekerjaan ?>">
+														<?php } ?>
+													</a>
+													<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+														<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+														<input type="file" name="image_1" class="form-control"> <br>
+														<input type="submit" name="image2" value="upload" class="btn btn-sm btn-success btn-block">
+													</form>
+												</div>
+												<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+													<a href="./assets/images/kegiatan/<?= $data->image_3 ?>" target="_blank" class="thumbnail">
+														<?php if (empty($data->image_3)) { ?>
+															<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+															<?php } else { ?>
+															<img src="./assets/images/kegiatan/small_<?= $data->image_3 ?>" alt="<?= $data->nama_pekerjaan ?>">
+														<?php } ?>
+													</a>
+													<form action="?module=pemetaan" method="POST" enctype="multipart/form-data">
+														<input type="hidden" name="id_pekerjaan" value="<?= $data->id_pekerjaan ?>">
+														<input type="file" name="image_1" class="form-control"> <br>
+														<input type="submit" name="image3" value="upload" class="btn btn-sm btn-success btn-block">
+													</form>
 												</div>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 										</div>
 									</div>
 								</div>
+							</div>
 							<?php } ?>
-							</tr>
 						</tbody>
 					</table>
 				</div>

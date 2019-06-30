@@ -9,6 +9,11 @@ elseif ($_GET['module'] =='home'){
   include "modul/mod_home/home.php";
 }
 
+// Bagian Details
+elseif ($_GET['module'] =='details'){
+  include "modul/mod_home/details.php";
+}
+
 // Bagian Pekerjaan
 elseif ($_GET['module']=='pekerjaan'){
   include "modul/mod_pekerjaan/pekerjaan.php";
