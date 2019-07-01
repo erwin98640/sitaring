@@ -505,6 +505,7 @@ $(document).ready(function(){
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
+				<a href="./modul/mod_export/exportExcel.php" class="btn btn-info btn-block">Eport to Excel</a> <br>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
 						<thead class="text-nowrap text-uppercase">
