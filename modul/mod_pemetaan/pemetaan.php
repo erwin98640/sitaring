@@ -26,11 +26,6 @@
 		<script language="javascript">document.location.href="?module=pemetaan"</script>
 
 	<?php } if (isset($_POST['update'])) {
-		// $lokasi_file_2		= $_FILES['image_2']['tmp_name'];
-		// $image_2			= $_FILES['image_2']['name'];
-		// $lokasi_file_2		= $_FILES['image_3']['tmp_name'];
-		// $image_3			= $_FILES['image_3']['name'];
-
 		$kode				= $_POST['kode'];
 		$program			= $_POST['program'];
 		$kegiatan			= $_POST['kegiatan'];
@@ -121,14 +116,21 @@
 			<script language="javascript">document.location.href="?module=pemetaan"</script>
 	<?php }
 switch (isset($_GET['act'])) { default: ?>
-
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script> -->
-<script type="text/javascript" src="assets/js/jquery-1.12.3.js"></script>
-<!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFpkPVjM26Py4C4pDe9RiCVWPl4s_pXrw&callback=initMap"></script>
-<script type="text/javascript">
+	<script type="text/javascript" src="assets/js/jquery-1.12.3.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFpkPVjM26Py4C4pDe9RiCVWPl4s_pXrw&callback=initMap"></script>
+	<script type="text/javascript">
 	var peta;
 	var jenis = "kelapa";
+
+	var koorx = new Array();
+	var koory = new Array();
+	var getKode = new Array();
+	var getProgram = new Array();
+	var getKegiatan = new Array();
+	var getNamaPekerjaan = new Array();
+	var getTahunPerolehan = new Array();
+	var getRealisasiKeuangan = new Array();
+	var getRealisasiFisik = new Array();
 	
 	function carikordinat(){
 		var jakarta = new google.maps.LatLng(-2.8497764266656023, 115.49523923546076);
@@ -142,95 +144,14 @@ switch (isset($_GET['act'])) { default: ?>
 			kasihtanda(event.latLng);
 		});
 		ambildatabase('awal');
-		
-		/*untuk tgl*/
-		// new JsDatePick({
-		// 	useMode:2,
-		// 	target:"tgl",
-		// 	dateFormat:"%Y-%m-%d"
-		// });
 	}
 
-
-
 	$(document).ready(function(){
-    $("#tombol_simpan").click(function(){
-        var x = $("#x").val();
-        var y = $("#y").val();
-        var judul = $("#judul").val();
-        var des = $("#deskripsi").val();
-		
-		var id_info = $("#id_info").val();
-		var id_prov = $("#id_prov").val();
-		var id_bencana = $("#id_bencana").val();
-		
-		var korban = $("#korban").val();
-		var penyebab = $("#penyebab").val();
-		var tgl = $("#tgl").val();
-		
-        $("#loading").show();
-        $.ajax({
-            url: "simpanlokasi.php",
-            data: "x="+x+"&y="+y+"&jenis="+jenis+"&id_info="+id_info+"&id_prov="+id_prov+"&id_bencana="+id_bencana+"&korban="+korban+"&penyebab="+penyebab+"&tgl="+tgl,
-            cache: false,
-            success: function(msg){
-                alert(msg);
-                $("#loading").hide();
-                $("#x").val("");
-                $("#y").val("");
-				$("#id_info").val("");
-				$("#korban").val("");
-				$("#penyebab").val("");
-				$("#tgl").val("");
-                ambildatabase('akhir');
-				document.location.href='?page=info-bencana';
-            }
-        });
-    });
-    $("#tutup").click(function(){
-        $("#jendelainfo").fadeOut();
-    });
-});
+		$("#tutup").click(function(){
+			$("#jendelainfo").fadeOut();
+		});
+	});
 
-
-$(document).ready(function(){
-    $("#tombol_simpan").click(function(){
-        var x = $("#x").val();
-        var y = $("#y").val();
-        var judul = $("#judul").val();
-        var des = $("#deskripsi").val();
-		
-		var id_info = $("#id_info").val();
-		var id_prov = $("#id_prov").val();
-		var id_bencana = $("#id_bencana").val();
-		
-		var korban = $("#korban").val();
-		var penyebab = $("#penyebab").val();
-		var tgl = $("#tgl").val();
-		
-        $("#loading").show();
-        $.ajax({
-            url: "simpanlokasi.php",
-            data: "x="+x+"&y="+y+"&jenis="+jenis+"&id_info="+id_info+"&id_prov="+id_prov+"&id_bencana="+id_bencana+"&korban="+korban+"&penyebab="+penyebab+"&tgl="+tgl,
-            cache: false,
-            success: function(msg){
-                alert(msg);
-                $("#loading").hide();
-                $("#x").val("");
-                $("#y").val("");
-				$("#id_info").val("");
-				$("#korban").val("");
-				$("#penyebab").val("");
-				$("#tgl").val("");
-                ambildatabase('akhir');
-				document.location.href='?page=info-bencana';
-            }
-        });
-    });
-    $("#tutup").click(function(){
-        $("#jendelainfo").fadeOut();
-    });
-});
 	function kasihtanda(lokasi){
 		set_icon(jenis);
 		tanda = new google.maps.Marker({
@@ -264,13 +185,22 @@ $(document).ready(function(){
 
 	function ambildatabase(awal){
 		url = "modul/mod_pemetaan/ambildata.php";
-		// url = "ambildata.php";
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			cache: false,
 			success: function(msg){
 				for(i=0;i<msg.wilayah.petak.length;i++){
+				
+					koorx[i] = msg.wilayah.petak[i].x;
+					koory[i] = msg.wilayah.petak[i].y;
+					getKode[i] = msg.wilayah.petak[i].kode;
+					getProgram[i] = msg.wilayah.petak[i].program;
+					getKegiatan[i] = msg.wilayah.petak[i].kegiatan;
+					getNamaPekerjaan[i] = msg.wilayah.petak[i].nama_pekerjaan;
+					getTahunPerolehan[i] = msg.wilayah.petak[i].tahun_perolehan;
+					getRealisasiKeuangan[i] = msg.wilayah.petak[i].realisasi_keuangan;
+					getRealisasiFisik[i] = msg.wilayah.petak[i].realisasi_fisik;
 					
 					set_icon(msg.wilayah.petak[i].jenis);
 					var point = new google.maps.LatLng(
@@ -290,49 +220,32 @@ $(document).ready(function(){
 	function setinfo(petak, nomor){
 		google.maps.event.addListener(petak, 'click', function() {
 			$("#jendelainfo").fadeIn();
-			// $("#teksjudul").html(judulx[nomor]);
-			// $("#teksdes").html(desx[nomor]);
-			// $("#teksprov").html(provx[nomor]);
-			// $("#teksbencana").html(bencanax[nomor]);
-			// $("#teksid_info").html(id_infox[nomor]);
-			// $("#tekskorban").html(korbanx[nomor]);
-			// $("#tekspenyebab").html(penyebabx[nomor]);
-			// $("#tekstgl").html(tglx[nomor]);
+			$("#textKode").html(getKode[nomor]);
+			$("#textProgram").html(getProgram[nomor]);
+			$("#textKegiatan").html(getKegiatan[nomor]);
+			$("#textNamaPekerjaan").html(getNamaPekerjaan[nomor]);
+			$("#textTahunPerolehan").html(getTahunPerolehan[nomor]);
+			$("#textRealisasiKeuangan").html("Rp "+getRealisasiKeuangan[nomor]);
+			$("#textRealisasiFisik").html(getRealisasiFisik[nomor]+" %");
 			
-			// $("#tekskoorx").html(koorx[nomor]);
-			// $("#tekskoory").html(koory[nomor]);
+			$("#tekskoorx").html(koorx[nomor]);
+			$("#tekskoory").html(koory[nomor]);
 		});
 	}
 </script>
 
 
 <style>
-/* #jendelainfo{position:absolute;z-index:1000;top:100; */
-/* left:400;background-color:yellow;display:none;} */
+	#jendelainfo {
+		position:absolute;
+		z-index:1;
+		top: 1000;
+		left:370;
+		display:none;
+	}
 </style>
 </head>
-<!-- <body onload="peta_awal()">
-<center>
-<table id="jendelainfo" border="0" cellpadding="4" cellspacing="0" style="border-collapse: collapse" bordercolor="#FFCC00" height="140">
-  <tr>
-    <td width="248" bgcolor="#000000" height="19"><font color=white>ID Info : <span id="teksid_info"></span></font></td>
-    <td width="30" bgcolor="#000000" height="19">
-    <p align="center"><font color="#FFFFFF"><a style="cursor:pointer" id="tutup"><b>X</b></a></font></td>
-  </tr>
-  <tr>
-    <td bgcolor="#FFCC00" valign="top" colspan="2"> 
-    Provinsi : <span id="teksprov"></span><br>
-	Bencana : <span id="teksbencana"></span><br>
-	Tanggal : <span id="tekstgl"></span><br>
-	Korban : <span id="tekskorban"></span><br>
-	Penyebab : <span id="tekspenyebab"></span><br>
-	
-	Koor X : <span id="tekskoorx"></span><br>
-	Koor Y : <span id="tekskoory"></span><br>
-	</td>
-  </tr>
-</table> -->
-
+<body onload="peta_awal()">
 	<form action="?module=pemetaan" enctype="multipart/form-data" method="POST">
 	<div class="container-fluid">
 		<div class="row">
@@ -346,13 +259,9 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="form-group">
-					<label>ICON PEKERJAAN</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<label>ICON PEKERJAAN</label>
 					<img src="./assets/images/location.png">
 					<input type="radio" checked name="jenis" value="kelapa" onclick="setjenis(this.value)"> Bangunan
-					<!-- <img src="images/kelapa_sawit.png">
-					<input type="radio" name="jenis" value="kelapa_sawit" onclick="setjenis(this.value)"> Kelapa Sawit&nbsp;&nbsp;&nbsp;&nbsp;
-					<img src="images/karet.png">
-					<input type="radio" name="jenis" value="karet" onclick="setjenis(this.value)"> Karet&nbsp;&nbsp;&nbsp;&nbsp; -->
 				</div>
 			</div>
 			<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
@@ -487,17 +396,41 @@ $(document).ready(function(){
 		<input type="button" value="Cancel" class="btn btn-warning pull-right" onclick="return RefreshWindow();"/>
 	</div>
 	</form>
+	<div id="jendelainfo" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="tutup" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Informasi Pekerjaan</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<strong>KODE / PROGRAM DAN KEGIATAN</strong> <br>
+							<span id="textKode"></span><br>
+							<span id="textProgram"></span><br>
+							<span id="textKegiatan"></span><br>
+						</div>	
+						<div class="col-lg-4">
+							<strong>NAMA PEKERJAAN / TAHUN</strong> <br>
+							<span id="textNamaPekerjaan"></span><br>
+							<span id="textTahunPerolehan"></span><br>
+						</div>
+						<div class="col-lg-4">
+							<strong>REALISASI KEUANGAN / FISIK</strong> <br>
+							<span id="textRealisasiKeuangan"></span><br>
+							<span id="textRealisasiFisik"></span><br>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel" id="services">
-					<div id="kanvaspeta" style="margin:0px auto; width:100%; height:95%; float:right; padding:0px;">
-						<!--
-						<script language="javascript" type="text/javascript">
-							carikordinat(new google.maps.LatLng(-2.8497764266656023, 115.49523923546076));
-						</script>
-						-->
-					</div>
+					<div id="kanvaspeta" style="margin:0px auto; width:100%; height:95%; float:right; padding:0px;"></div>
 				</div>
 			</div>
 		</div>
@@ -898,42 +831,4 @@ $(document).ready(function(){
 		<input type="button" value="Cancel" class="btn btn-warning pull-right" onclick="javascript:history.back()"/>
 	</div>
 	</form>
-	<!-- <divs class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="table-responsive">
-					<table class="table table-hover table-striped table-bordered">
-						<thead>
-							<tr class="success text-uppercase">
-								<th>No</th>
-								<th>Id</th>
-								<th>Triwulan</th>
-								<th>Komoditi</th>
-								<th>Penyakit</th>
-								<th>Kabupaten</th>
-								<th>Pengendalian</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-								$query=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan ORDER BY id_pekerjaan");
-								$no=1;
-								while ($data=mysqli_fetch_assoc($query)) {
-							?>
-							<tr>
-								<td><?php echo $no ?></td>
-								<?php foreach ($data as $key){ ?>
-								<td><?php echo $key ?></td>
-								<?php } ?>
-							</tr>
-							<?php
-								$no++;
-								}
-							?>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</divs> -->
 <?php break; } ?>

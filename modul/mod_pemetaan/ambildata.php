@@ -8,6 +8,13 @@
         $json .= '"id":"'.$x['id_pekerjaan'].'",
             "x":"'.$x['koordinat_x'].'",
             "y":"'.$x['koordinat_y'].'",
+            "kode":"'.$x['kode'].'",
+            "program":"'.$x['program'].'",
+            "kegiatan":"'.$x['kegiatan'].'",
+            "nama_pekerjaan":"'.$x['nama_pekerjaan'].'",
+            "tahun_perolehan":"'.$x['tahun_perolehan'].'",
+            "realisasi_keuangan":"'.$x['realisasi_keuangan'].'",
+            "realisasi_fisik":"'.$x['realisasi_fisik'].'",
 
             "jenis":"kelapa"
         },';
