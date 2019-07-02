@@ -173,6 +173,6 @@
                 </div>
                 <?php } ?>
             </tbody>
-        </div>
+        </table>
     </div>
 </div>
