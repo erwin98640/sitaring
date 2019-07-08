@@ -237,11 +237,13 @@ switch (isset($_GET['act'])) { default: ?>
 
 <style>
 	#jendelainfo {
-		position:absolute;
-		z-index:1;
-		top: 1000;
-		left:370;
-		display:none;
+		position: absolute;
+		z-index: 1;
+		top: 780;
+		left: 0;
+		right: 0;
+		margin: auto;
+		display: none;
 	}
 </style>
 </head>
@@ -422,6 +424,35 @@ switch (isset($_GET['act'])) { default: ?>
 							<span id="textRealisasiFisik"></span><br>
 						</div>	
 					</div>
+					<div class="row">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<a href="./assets/images/kegiatan/<?= $data->image_1 ?>" target="_blank" class="thumbnail">
+								<?php if (empty($data->image_1)) { ?>
+									<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+									<?php } else { ?>
+									<img src="./assets/images/kegiatan/small_<?= $data->image_1 ?>" alt="<?= $data->nama_pekerjaan ?>">
+								<?php } ?>
+							</a>
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<a href="./assets/images/kegiatan/<?= $data->image_2 ?>" target="_blank" class="thumbnail">
+								<?php if (empty($data->image_2)) { ?>
+									<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+									<?php } else { ?>
+									<img src="./assets/images/kegiatan/small_<?= $data->image_2 ?>" alt="<?= $data->nama_pekerjaan ?>">
+								<?php } ?>
+							</a>
+						</div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							<a href="./assets/images/kegiatan/<?= $data->image_3 ?>" target="_blank" class="thumbnail">
+								<?php if (empty($data->image_3)) { ?>
+									<img src="./assets/images/kegiatan/no-image.jpg" alt="Tidak Ada Gambar">
+									<?php } else { ?>
+									<img src="./assets/images/kegiatan/small_<?= $data->image_3 ?>" alt="<?= $data->nama_pekerjaan ?>">
+								<?php } ?>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -438,7 +469,7 @@ switch (isset($_GET['act'])) { default: ?>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<a href="./modul/mod_export/exportExcel.php" class="btn btn-info btn-block">Eport to Excel</a> <br>
+				<a href="./modul/mod_export/exportExcel.php" class="btn btn-info btn-block">Ekport to Excel</a> <br>
 				<div class="table-responsive">
 					<table class="table table-hover table-striped table-bordered">
 						<thead class="text-nowrap text-uppercase">

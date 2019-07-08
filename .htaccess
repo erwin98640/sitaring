@@ -1,0 +1,8 @@
+RewriteEngine on
+
+# RewriteCond %{HTTP_HOST} ^www\.tukarjual\.com [NC] // www nya selalu hilang
+# RewriteCond %{HTTP_HOST} ^tukarjual.com$
+# RewriteRule ^(.*)$ http://www.tukarjual.com/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
