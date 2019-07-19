@@ -54,10 +54,12 @@
 	<?php }
 
 	if (isset($_POST['image1'])){
+		$date 			= date("YmdHis");
 		$id_pekerjaan	= $_POST['id_pekerjaan'];
 		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
 		$image_1		= $_FILES['image_1']['name'];
-		UploadGambar($image_1);
+		$namaImgae_1	= $date.$image_1;
+		UploadGambar($namaImgae_1);
 
 		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
 		$cek=mysqli_fetch_array($a);
@@ -69,14 +71,16 @@
 		unlink($imageSmall);
 		unlink($imageMedium);
 		
-		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_1='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_1='$namaImgae_1' WHERE id_pekerjaan='$id_pekerjaan'");
 	}
 
 	if (isset($_POST['image2'])){
+		$date 			= date("YmdHis");
 		$id_pekerjaan	= $_POST['id_pekerjaan'];
 		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
 		$image_1		= $_FILES['image_1']['name'];
-		UploadGambar($image_1);
+		$namaImgae_1	= $date.$image_1;
+		UploadGambar($namaImgae_1);
 
 		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
 		$cek=mysqli_fetch_array($a);
@@ -88,14 +92,16 @@
 		unlink($imageSmall);
 		unlink($imageMedium);
 
-		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_2='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_2='$namaImgae_1' WHERE id_pekerjaan='$id_pekerjaan'");
 	}
 
 	if (isset($_POST['image3'])){
+		$date 			= date("YmdHis");
 		$id_pekerjaan	= $_POST['id_pekerjaan'];
 		$lokasi_file_1	= $_FILES['image_1']['tmp_name'];
 		$image_1		= $_FILES['image_1']['name'];
-		UploadGambar($image_1);
+		$namaImgae_1	= $date.$image_1;
+		UploadGambar($namaImgae_1);
 
 		$a=mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
 		$cek=mysqli_fetch_array($a);
@@ -107,11 +113,36 @@
 		unlink($imageSmall);
 		unlink($imageMedium);
 
-		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_3='$image_1' WHERE id_pekerjaan='$id_pekerjaan'");
+		mysqli_query($koneksi, "UPDATE data_pekerjaan SET image_3='$namaImgae_1' WHERE id_pekerjaan='$id_pekerjaan'");
 	}
 
 	if(isset($_GET['mode'])=='delete'){
 		$id_pekerjaan=$_GET['id_pekerjaan'];
+
+		$a	= mysqli_query($koneksi, "SELECT * FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'");
+		$cek= mysqli_fetch_array($a);
+
+		$imageOri1		= "assets/images/kegiatan/$cek[image_1]";
+		$imageSmall1	= "assets/images/kegiatan/small_$cek[image_1]";
+		$imageMedium1	= "assets/images/kegiatan/medium_$cek[image_1]";
+		unlink($imageOri1);
+		unlink($imageSmall1);
+		unlink($imageMedium1);
+		
+		$imageOri2		= "assets/images/kegiatan/$cek[image_2]";
+		$imageSmall2	= "assets/images/kegiatan/small_$cek[image_2]";
+		$imageMedium2	= "assets/images/kegiatan/medium_$cek[image_2]";
+		unlink($imageOri2);
+		unlink($imageSmall2);
+		unlink($imageMedium2);
+
+		$imageOri3		= "assets/images/kegiatan/$cek[image_3]";
+		$imageSmall3	= "assets/images/kegiatan/small_$cek[image_3]";
+		$imageMedium3	= "assets/images/kegiatan/medium_$cek[image_3]";
+		unlink($imageOri3);
+		unlink($imageSmall3);
+		unlink($imageMedium3);
+
 		mysqli_query($koneksi, "DELETE FROM data_pekerjaan WHERE id_pekerjaan='$id_pekerjaan'"); ?>
 			<script language="javascript">document.location.href="?module=pemetaan"</script>
 	<?php }
